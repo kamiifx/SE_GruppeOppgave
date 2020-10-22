@@ -11,7 +11,9 @@ public class AppTestUserRepo {
         oUser.add(arne);
         oUser.add(geir);
         oUser.add(kristin);
-
+        AppUserJson userJson = new AppUserJson();
+        userJson.writeArrayToJson(oUser);
+        userJson.readJson();
     }
 
     User arne = new User("Arne","Nordmann","12345","arne@email.no");
