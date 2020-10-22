@@ -1,7 +1,7 @@
 <template id="app-login">
     <div class="wrapper">
         <header>
-            <h1>Start på login</h1>
+            <h1>hei</h1>
         </header>
     </div>
 </template>

@@ -7,5 +7,13 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class App {
+    public static void main(String[] args) {
+        Javalin app = Javalin.create().start(7000);
+        app.config.enableWebjars();
 
+
+
+        //login side
+        app.get("/", new VueComponent("app-login"));
+    }
 }
