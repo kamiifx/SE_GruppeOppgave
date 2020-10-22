@@ -1,0 +1,23 @@
+<html>
+<head>
+    <meta charset="utf8">
+    <!--<script src="/webjars/vue/2.6.10/dist/vue.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    @componentRegistration
+</head>
+<body>
+<main id="main-vue" v-cloak>
+    @routeComponent
+</main>
+<script>
+    new Vue({el: "#main-vue"});
+</script>
+<style>
+
+    body{
+        background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+</style>
+</body>
+</html>
