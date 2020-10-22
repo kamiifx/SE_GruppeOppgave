@@ -24,7 +24,7 @@ public class AppUserJson {
         }
     }
 
-    public void writeJson() {                                           //Skriver jObservation spesefikt.
+    public void writeJson() {
         File fileOfJson = new File("jsonUsers");
         try {
             ObjectMapper objectMapper = new ObjectMapper();
