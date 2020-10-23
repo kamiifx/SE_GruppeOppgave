@@ -14,7 +14,7 @@
                     <h3>User Login</h3>
                     <span v-on:click="modalActive = false">&#10799;</span>
                 </div>
-                <form action="">
+                <form :action=`` method="post">
                     <p>Username</p>
                     <input type="text" placeholder="Username">
                     <p>Password</p>
