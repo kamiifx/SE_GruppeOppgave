@@ -20,3 +20,5 @@ public class App {
         app.get("/", new VueComponent("<app-login><app-login>"));
     }
 }
+
+// Fungerer det å pushe?
