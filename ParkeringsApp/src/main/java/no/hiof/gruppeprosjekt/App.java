@@ -17,6 +17,6 @@ public class App {
 
 
         //login side
-        app.get("/", new VueComponent("app-login"));
+        app.get("/", new VueComponent("<app-login><app-login>"));
     }
 }
