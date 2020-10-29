@@ -67,4 +67,15 @@ public class ParkingSpace {
     public void setSpaceId(int spaceId) {
         this.spaceId = spaceId;
     }
+
+    @Override
+    public String toString() {
+        return "ParkingSpace{" +
+                "city='" + city + '\'' +
+                ", address='" + address + '\'' +
+                ", size_sqm=" + size_sqm +
+                ", price_ph=" + price_ph +
+                ", spaceId=" + spaceId +
+                '}';
+    }
 }

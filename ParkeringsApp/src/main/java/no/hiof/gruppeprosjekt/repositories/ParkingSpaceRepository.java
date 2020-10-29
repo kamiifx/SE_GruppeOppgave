@@ -44,8 +44,8 @@ public class ParkingSpaceRepository implements IParkingSpaceRepository{
     }
 
     @Override
-    public void createParkingSpace(String city, String address, double size_sqm, double price_ph) {
-        ParkingSpace space = new ParkingSpace(city, address, size_sqm, price_ph);
+    public void createParkingSpace(String city, String address, String size_sqm, String price_ph) {
+        ParkingSpace space = new ParkingSpace(city, address, Double.parseDouble(size_sqm), Double.parseDouble(price_ph));
         parkingSpaces.add(space);
         writeJson();
     }
