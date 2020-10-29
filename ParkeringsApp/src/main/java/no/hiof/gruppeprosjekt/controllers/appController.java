@@ -4,5 +4,4 @@ import io.javalin.http.Context;
 
 
 public class appController {
-
 }
