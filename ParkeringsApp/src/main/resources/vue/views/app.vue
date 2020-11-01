@@ -4,12 +4,19 @@
             <img src="https://www.flaticon.com/svg/static/icons/svg/1159/1159499.svg" alt="logo">
             <h3>Parkering<br> App</h3>
             <div class="logins">
-                <button class="button-user-login" v-on:click="modalActive = true">Logout</button>
+                <button class="button-user-login">Logout</button>
             </div>
         </header>
+        <aside>
+            <div class="brukerInfo">
+                <p>Bruker info:</p>
+                <p>{{users.name}} {{users.lastName}}</p>
+                <p>{{users.mail}}</p>
+            </div>
+
+        </aside>
 
         <main>
-            <h2>Main APP Page</h2>
 
         </main>
 
@@ -19,14 +26,14 @@
     Vue.component("app", {
         template: "#app",
         methods:({
-            openModal: function () {
-            }
+
         }),
         data:() =>({
-            users:[]
+            users:null,
         }),
         created() {
-            fetch("/api/users")
+            const userId = this.$javalin.pathParams["userId"];
+            fetch(`/api/users/${userId}`)
                 .then(res => res.json())
                 .then(res => {
                     this.users = res;
@@ -77,6 +84,11 @@
     .button-user-login{
         margin-left: 15px;
         background-color: #1dd1a1;
+    }
+
+    aside{
+        position: absolute;
+        top:7%;
     }
 
 </style>

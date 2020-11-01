@@ -39,6 +39,13 @@ public class App {
                 userController.registerUser(ctx);
             }
         });
-        app.get("/app/:id",new VueComponent("app"));
+        //app user Page
+        app.get("/app/:userId",new VueComponent("app"));
+        app.get("/api/users/:userId", new Handler() {
+            @Override
+            public void handle(@NotNull Context ctx) throws Exception {
+                userController.getSingleUser(ctx);
+            }
+        });
     }
 }

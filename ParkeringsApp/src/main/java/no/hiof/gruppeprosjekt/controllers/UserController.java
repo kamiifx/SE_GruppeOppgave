@@ -38,4 +38,10 @@ public class UserController {
         context.redirect("/app/" + id);
     }
 
+    public void getSingleUser(Context context){
+        String userId = context.pathParam("userId");
+        User getUser = userJsonRepo.getUserById(Integer.parseInt(userId));
+        context.json(getUser);
+    }
+
 }
