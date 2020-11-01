@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class AppUserJson {
+public class AppUserJson implements IUserRepository{
     private ArrayList<User> jUser = new ArrayList<User>();
 
     public void readJson(){
@@ -52,4 +52,38 @@ public class AppUserJson {
     }
 
 
+    @Override
+    public ArrayList<User> getAllUsers() {
+        return jUser;
+    }
+
+    @Override
+    public User getUserByMail(String email) {
+        for (User user : jUser){
+            if (user.getMail() == email){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void registerUser(String name, String lastName, String password, String email) {
+        User registerUser = new User(name,lastName,password,email);
+        jUser.add(registerUser);
+    }
+
+    @Override
+    public void deleteUser(String email) {
+        jUser.remove(getUserByMail(email));
+    }
+
+    @Override
+    public void updateUser(String name, String lastName, String password, String email) {
+        User updateUser = getUserByMail(email);
+        updateUser.setName(name);
+        updateUser.setLastName(lastName);
+        updateUser.setPassword(password);
+        updateUser.setMail(password);
+    }
 }

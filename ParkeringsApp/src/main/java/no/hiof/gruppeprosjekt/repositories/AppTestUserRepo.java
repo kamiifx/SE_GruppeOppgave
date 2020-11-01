@@ -1,7 +1,6 @@
 package no.hiof.gruppeprosjekt.repositories;
 
 import no.hiof.gruppeprosjekt.model.User;
-
 import java.util.ArrayList;
 
 public class AppTestUserRepo {
