@@ -3,21 +3,33 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Random;
+
 
 public class User extends Email{
+
     private String name;
     private String lastName;
     private String password;
+    private int id ;
 
     public User(){}
 
-    public User(String name,String lastName,String password, String email){
+    public User(int id, String name,String lastName,String password, String email){
         super(email);
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.password = password;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

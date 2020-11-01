@@ -4,7 +4,6 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.plugin.rendering.vue.VueComponent;
 import no.hiof.gruppeprosjekt.controllers.UserController;
-import no.hiof.gruppeprosjekt.repositories.AppTestUserRepo;
 import no.hiof.gruppeprosjekt.repositories.AppUserJson;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,11 +27,18 @@ public class App {
                 userController.getAllUsers(ctx);
             }
         });
+        app.post("/api/login", new Handler() {
+            @Override
+            public void handle(@NotNull Context ctx) throws Exception {
+                userController.loginUser(ctx);
+            }
+        });
         app.post("/api/register", new Handler() {
             @Override
             public void handle(@NotNull Context ctx) throws Exception {
                 userController.registerUser(ctx);
             }
         });
+        app.get("/app/:id",new VueComponent("app"));
     }
 }

@@ -12,6 +12,8 @@ import java.util.Collections;
 public class AppUserJson implements IUserRepository{
     private ArrayList<User> jUser = new ArrayList<User>();
     private String fileName = "jsonUsers";
+    private User activeUser;
+    private Boolean loggedin = false;
 
     public AppUserJson(){ readJson(fileName); }
 
@@ -63,7 +65,7 @@ public class AppUserJson implements IUserRepository{
     @Override
     public User getUserByMail(String email) {
         for (User user : jUser){
-            if (user.getMail() == email){
+            if (user.getMail().equals(email)){
                 return user;
             }
         }
@@ -71,8 +73,29 @@ public class AppUserJson implements IUserRepository{
     }
 
     @Override
-    public void registerUser(String name, String lastName, String password, String email) {
-        User registerUser = new User(name,lastName,password,email);
+    public User getUserById(int id) {
+        for (User user : jUser){
+            if (user.getId() == id){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void loginUser(String email, String password) {
+        User user = getUserByMail(email);
+        if (user.getMail().equals(email) && user.getPassword().equals(password)){
+            activeUser = user;
+            loggedin = true;
+        }
+        activeUser = null;
+        loggedin = false;
+    }
+
+    @Override
+    public void registerUser(int id,String name, String lastName, String password, String email) {
+        User registerUser = new User(id,name,lastName,password,email);
         jUser.add(registerUser);
         writeArrayToJson(jUser);
     }
@@ -80,6 +103,7 @@ public class AppUserJson implements IUserRepository{
     @Override
     public void deleteUser(String email) {
         jUser.remove(getUserByMail(email));
+        writeArrayToJson(jUser);
     }
 
     @Override
@@ -89,5 +113,6 @@ public class AppUserJson implements IUserRepository{
         updateUser.setLastName(lastName);
         updateUser.setPassword(password);
         updateUser.setMail(password);
+        writeArrayToJson(jUser);
     }
 }
