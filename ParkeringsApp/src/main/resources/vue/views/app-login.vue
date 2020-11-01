@@ -9,18 +9,25 @@
             </div>
         </header>
         <div class="modalFormWrap" v-bind:style='{display:(modalActive?"block":"none")}'>
-            <div class="modalForm">
+            <div v-bind:style='{height:(register?"500px":"320px")}' class="modalForm">
                 <div class="modalHeader">
                     <h3>User Login</h3>
-                    <span v-on:click="modalActive = false">&#10799;</span>
+                    <span v-on:click="modalActive = false, register=false">&#10799;</span>
                 </div>
-                <form :action=`` method="post">
-                    <p>Username</p>
-                    <input type="text" placeholder="Username">
+                <form v-bind:action='(register?"/api/register":"/api/login")' method="post">
+                    <div v-bind:style='{display:(register?"block":"none")}' class="reg">
+                        <p>Name</p>
+                        <input name="name" type="text" placeholder="Name">
+                        <p>Lastname</p>
+                        <input name="lastName" type="text" placeholder="Lastname">
+                    </div>
+                    <p>Email</p>
+                    <input name="email" type="text" placeholder="Email">
                     <p>Password</p>
-                    <input type="password" placeholder="Password">
-                    <p class="userRegister">Register</p>
-                    <button class="modalLogin">Login</button>
+                    <input name="password" type="password" placeholder="Password">
+                    <p v-on:click="register=true" class="userRegister">Register</p>
+                    <button class="modalRegister" v-bind:style='{display: (register?"block":"none")}'>Register</button>
+                    <button class="modalLogin" v-bind:style='{display:(register?"none":"block")}'>Login</button>
                 </form>
             </div>
         </div>
@@ -34,22 +41,22 @@
 <script>
     Vue.component("app-login", {
         template: "#app-login",
-        data: () => ({
-            modalActive:false
-        }),
         methods:({
             openModal: function () {
             }
-        })
-        /*,
+        }),
+        data:() =>({
+            modalActive:false,
+            register:false,
+            users:[]
+        }),
         created() {
             fetch("/api/users")
                 .then(res => res.json())
                 .then(res => {
-                    this.user = res;
-                })
-                .catch(() => alert("Error getting user"));
-        }*/
+                    this.users = res;
+                }).catch(() => alert("Error getting user"));
+        }
     });
 </script>
 <style>

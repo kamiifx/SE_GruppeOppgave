@@ -11,9 +11,12 @@ import java.util.Collections;
 
 public class AppUserJson implements IUserRepository{
     private ArrayList<User> jUser = new ArrayList<User>();
+    private String fileName = "jsonUsers";
 
-    public void readJson(){
-        File fileOfJson = new File("jsonUsers");
+    public AppUserJson(){ readJson(fileName); }
+
+    public void readJson(String filnavn){
+        File fileOfJson = new File(filnavn);
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.findAndRegisterModules();
@@ -28,8 +31,8 @@ public class AppUserJson implements IUserRepository{
         File fileOfJson = new File("jsonUsers");
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            objectMapper.findAndRegisterModules();
-            objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+            /*objectMapper.findAndRegisterModules();
+            objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);*/
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(fileOfJson, jUser);
 
         } catch (IOException e) {
@@ -71,6 +74,7 @@ public class AppUserJson implements IUserRepository{
     public void registerUser(String name, String lastName, String password, String email) {
         User registerUser = new User(name,lastName,password,email);
         jUser.add(registerUser);
+        writeArrayToJson(jUser);
     }
 
     @Override
