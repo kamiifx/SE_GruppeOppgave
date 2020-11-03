@@ -3,6 +3,7 @@ package no.hiof.gruppeprosjekt.repositories;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import no.hiof.gruppeprosjekt.model.ParkingSpace;
+import no.hiof.gruppeprosjekt.model.User;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,9 +12,11 @@ import java.util.Collections;
 
 //Akkurat nå leses det og skrives det i JSON siden vi ikke har noe database ute
 public class ParkingSpaceRepository implements IParkingSpaceRepository{
+    private IUserRepository userRepository;
     private ArrayList<ParkingSpace> parkingSpaces = new ArrayList<>();
 
-    public ParkingSpaceRepository() {
+    public ParkingSpaceRepository(IUserRepository userRepository) {
+        this.userRepository = userRepository;
         readJson();
         writeJson();
     }
@@ -44,8 +47,9 @@ public class ParkingSpaceRepository implements IParkingSpaceRepository{
     }
 
     @Override
-    public void createParkingSpace(String city, String address, String size_sqm, String price_ph) {
-        ParkingSpace space = new ParkingSpace(city, address, Double.parseDouble(size_sqm), Double.parseDouble(price_ph));
+    public void createParkingSpace(String city, String address, String size_sqm, String price_ph, String userId) {
+        User byUser = userRepository.getUserById(Integer.parseInt(userId));
+        ParkingSpace space = new ParkingSpace(city, address, Double.parseDouble(size_sqm), Double.parseDouble(price_ph), byUser);
         parkingSpaces.add(space);
         writeJson();
     }
