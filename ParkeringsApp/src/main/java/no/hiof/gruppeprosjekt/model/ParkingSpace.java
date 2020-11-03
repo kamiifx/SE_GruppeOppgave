@@ -1,8 +1,5 @@
 package no.hiof.gruppeprosjekt.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.sql.Time;
 import java.util.Random;
 
 public class ParkingSpace {
@@ -11,15 +8,16 @@ public class ParkingSpace {
     private double size_sqm;
     private double price_ph;
     private int spaceId;
-    //Skal se på muligheter for tid
+    private User byUser;
 
     Random rand = new Random();
 
-    public ParkingSpace(String city, String address, double size_sqm, double price_ph) {
+    public ParkingSpace(String city, String address, double size_sqm, double price_ph, User byUser) {
         this.city = city;
         this.address = address;
         this.size_sqm = size_sqm;
         this.price_ph = price_ph;
+        this.byUser = byUser;
         spaceId = rand.nextInt(1000);
     }
 
@@ -68,6 +66,14 @@ public class ParkingSpace {
         this.spaceId = spaceId;
     }
 
+    public User getByUser() {
+        return byUser;
+    }
+
+    public void setByUser(User byUser) {
+        this.byUser = byUser;
+    }
+
     @Override
     public String toString() {
         return "ParkingSpace{" +
@@ -76,6 +82,7 @@ public class ParkingSpace {
                 ", size_sqm=" + size_sqm +
                 ", price_ph=" + price_ph +
                 ", spaceId=" + spaceId +
+                ", byUser=" + byUser +
                 '}';
     }
 }
