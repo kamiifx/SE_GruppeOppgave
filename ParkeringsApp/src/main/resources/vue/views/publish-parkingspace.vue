@@ -1,7 +1,7 @@
 <template id="publish-parkingspace" @ParkingSpace-submitted="createParkingSpace">
   <div class="form-style">
-    <h2>Create new parkingspace {{user}}</h2>
-    <form class="create" @submit="checkForm" :action=`/api/app/${user}/publish_parkingspace` method="post">
+    <h2>Create new parkingspace {{user.id}}</h2>
+    <form class="create" @submit="checkForm" :action=`/api/app/${user.id}/publish_parkingspace` method="post">
       <div v-if="errors.length">
         <b>Please correct the following error(s):</b>
         <ul>
@@ -49,7 +49,12 @@ Vue.component("publish-parkingspace", {
     errors: []
   }),
   created() {
-    this.user = this.$javalin.pathParams["userId"];
+    const userId = this.$javalin.pathParams["userId"];
+    fetch(`/api/users/${userId}`)
+      .then(res => res.json())
+      .then(res => {
+        this.user = res;
+      }).catch(() => alert("Error getting user"));
   },
   methods: {
     checkForm: function (e) {
