@@ -3,8 +3,10 @@ import io.javalin.Javalin;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.plugin.rendering.vue.VueComponent;
+import no.hiof.gruppeprosjekt.controllers.ParkingSpaceController;
 import no.hiof.gruppeprosjekt.controllers.UserController;
 import no.hiof.gruppeprosjekt.repositories.AppUserJson;
+import no.hiof.gruppeprosjekt.repositories.ParkingSpaceRepository;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -14,6 +16,9 @@ public class App {
         AppUserJson userJsonRepo = new AppUserJson();
         UserController userController = new UserController(userJsonRepo);
 
+        //Repo + controller for publisering av parkeringsplass
+        ParkingSpaceRepository parkingSpaceRepository = new ParkingSpaceRepository(userJsonRepo);
+        ParkingSpaceController parkingSpaceController = new ParkingSpaceController(parkingSpaceRepository);
 
         Javalin app = Javalin.create().start(7000);
         app.config.enableWebjars();
@@ -47,5 +52,8 @@ public class App {
                 userController.getSingleUser(ctx);
             }
         });
+        //Side for publisering av parkeringsplasser
+        app.get("/app/:userId/publish-parkingspace", new VueComponent("publish-parkingspace"));
+        app.post("/api/app/:userId/publish_parkingspace", parkingSpaceController::createParkingSpace);
     }
 }
