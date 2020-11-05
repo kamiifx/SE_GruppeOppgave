@@ -55,5 +55,24 @@ public class App {
         //Side for publisering av parkeringsplasser
         app.get("/app/:userId/publish-parkingspace", new VueComponent("publish-parkingspace"));
         app.post("/api/app/:userId/publish_parkingspace", parkingSpaceController::createParkingSpace);
+
+        //Handler for å hente alle parkeringsplasser
+        app.get("/api/parking-spaces", new Handler() {
+            @Override
+            public void handle(@NotNull Context ctx) throws Exception {
+                parkingSpaceController.getAllSpaces(ctx);
+            }
+        });
+        app.get("/app/:userId/parkingspaces", new VueComponent("parking-spaces-overview"));
+
+        //Handler for å hente en spesifikk parkeringsplass
+        app.get("/api/parking-spaces/:spaceId", new Handler() {
+            @Override
+            public void handle(@NotNull Context ctx) throws Exception {
+                parkingSpaceController.getSingleSpace(ctx);
+            }
+        });
+        app.get("/app/:userId/parkingspaces/:spaceId", new VueComponent("parking-space-detail"));
+
     }
 }

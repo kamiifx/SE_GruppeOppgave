@@ -13,8 +13,8 @@
                 <p>{{users.name}} {{users.lastName}}</p>
                 <p>{{users.mail}}</p>
             </div>
-            <a id="publishSpaceButton" :href=`${users.id}/publish-parkingspace`>Publish parking space</a>
-            <a id="rentSpaceButton" :href=`${users.id}/parkingspaces`>Rent a parking space</a>
+            <a id="publishSpaceButton" :href=`${users.id}/publish-parkingspace`>Legg ut parkeringsplass</a>
+            <a id="rentSpaceButton" :href=`${users.id}/parkingspaces`>Lei en parkeringsplass</a>
 
         </aside>
 
@@ -94,6 +94,7 @@
     }
 
     #publishSpaceButton {
+      font-family: 'Roboto', sans-serif;
       padding: 12px 30px;
       background-color: #54a0ff;
       color: white;
@@ -111,6 +112,7 @@
     }
 
     #rentSpaceButton {
+      font-family: 'Roboto', sans-serif;
       padding: 12px 30px;
       background-color: #54a0ff;
       color: white;
