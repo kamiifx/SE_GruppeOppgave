@@ -9,6 +9,7 @@ public class ParkingSpace {
     private double price_ph;
     private int spaceId;
     private User byUser;
+    boolean available;
 
     Random rand = new Random();
 
@@ -19,6 +20,7 @@ public class ParkingSpace {
         this.price_ph = price_ph;
         this.byUser = byUser;
         spaceId = rand.nextInt(1000);
+        this.available = true;
     }
 
     //Tom konstruktør for lesing av .json filer
@@ -72,6 +74,14 @@ public class ParkingSpace {
 
     public void setByUser(User byUser) {
         this.byUser = byUser;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     @Override

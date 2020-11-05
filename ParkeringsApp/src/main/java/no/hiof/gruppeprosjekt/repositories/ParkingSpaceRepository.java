@@ -47,6 +47,21 @@ public class ParkingSpaceRepository implements IParkingSpaceRepository{
     }
 
     @Override
+    public ArrayList<ParkingSpace> getAllSpaces() {
+        return(parkingSpaces);
+    }
+
+    @Override
+    public ParkingSpace getSpaceById(int id) {
+        for(ParkingSpace space : parkingSpaces) {
+            if(space.getSpaceId() == id) {
+                return space;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public void createParkingSpace(String city, String address, String size_sqm, String price_ph, String userId) {
         User byUser = userRepository.getUserById(Integer.parseInt(userId));
         ParkingSpace space = new ParkingSpace(city, address, Double.parseDouble(size_sqm), Double.parseDouble(price_ph), byUser);
