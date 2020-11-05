@@ -1,7 +1,10 @@
 package no.hiof.gruppeprosjekt.repositories;
-import java.sql.*;
+import no.hiof.gruppeprosjekt.model.User;
 
-public class AppUserDatabase {
+import java.sql.*;
+import java.util.ArrayList;
+
+public class AppUserDatabase implements IUserRepository {
     String url = "jdbc:sqlite:userDatabase.sqlite";
 
     public AppUserDatabase(){createUserTable();}
@@ -42,4 +45,54 @@ public class AppUserDatabase {
         }
     }
 
+    public void insertUser(int id,String name, String lastName, String password, String email){
+        String userInsert = "INSERT INTO users(id,name,lastname,password,email)(VALUES?,?,?,?,?)";
+
+        try {
+            Connection connect = DriverManager.getConnection(url);
+            PreparedStatement preState = connect.prepareStatement(userInsert);
+            preState.setInt(1,id);
+            preState.setString(2,name);
+            preState.setString(3,lastName);
+            preState.setString(4,password);
+            preState.setString(5,email);
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public ArrayList<User> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public User getUserByMail(String email) {
+        return null;
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return null;
+    }
+
+    @Override
+    public void loginUser(String email, String password) {
+
+    }
+
+    @Override
+    public void registerUser(int id, String name, String lastName, String password, String email) {
+        insertUser(id,name,lastName,password,email);
+    }
+
+    @Override
+    public void deleteUser(String email) {
+
+    }
+
+    @Override
+    public void updateUser(String name, String lastName, String password, String email) {
+
+    }
 }
