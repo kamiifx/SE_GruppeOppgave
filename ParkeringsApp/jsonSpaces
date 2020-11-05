@@ -1,1 +1,19 @@
+<<<<<<< Updated upstream
 [ ]
+=======
+[ {
+  "city" : "Vestby",
+  "address" : "Paraaffe 15",
+  "size_sqm" : 8.0,
+  "price_ph" : 100.0,
+  "spaceId" : 487,
+  "byUser" : {
+    "mail" : "test@gmail.com",
+    "name" : "test",
+    "lastName" : "test",
+    "password" : "test123",
+    "id" : 61
+  },
+  "available" : true
+} ]
+>>>>>>> Stashed changes

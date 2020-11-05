@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserControllerTest {
 
-
+/*
     @Test
     void Create_User() {
         
@@ -42,18 +42,5 @@ class UserControllerTest {
 
     }
 
-
-    /*
-
-    CreateUser
-    LoginUser
-    UpdateUser
-    DeleteUser
-
-    CreateParkingSpace
-    DeleteParkingSpace
-    UpdateParkingSpace
-
-
-     */
+ */
 }

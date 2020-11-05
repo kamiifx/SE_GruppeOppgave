@@ -1,5 +1,6 @@
 package no.hiof.gruppeprosjekt.repositories;
 
+import com.fasterxml.jackson.module.kotlin.ReflectionCache;
 import no.hiof.gruppeprosjekt.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,23 @@ class AppUserJsonTest {
             passwordTrue = true;
         }
         assertTrue(emailTrue);
+    }
+
+    @Test
+    public void TestCreateUser(String email, String id) {
+
+        boolean  idCheck = false;
+        boolean  emailCheck = false;
+        if(email.equals(user.getMail()) && id.equals(user.getId())){
+            idCheck = true;
+            emailCheck = true;
+
+        }
+        assertTrue(idCheck);
+
+
+
+
     }
 
 }
