@@ -47,6 +47,28 @@ public class ParkingSpaceRepository implements IParkingSpaceRepository{
     }
 
     @Override
+<<<<<<< HEAD
+    public ParkingSpace confirmParking(int spaceId) {
+        for(ParkingSpace parkingspace : parkingSpaces){
+            if(parkingspace.getSpaceId()== spaceId){
+                return parkingspace;
+            }
+        }
+        return null;
+
+    }
+
+
+    @Override
+
+    public ArrayList<ParkingSpace> getAllUser() {
+        //returnerer Arraylisten til parkeringsplassen
+        return parkingSpaces;
+    }
+
+
+
+=======
     public ArrayList<ParkingSpace> getAllSpaces() {
         return(parkingSpaces);
     }
@@ -61,6 +83,7 @@ public class ParkingSpaceRepository implements IParkingSpaceRepository{
         return null;
     }
 
+>>>>>>> main
     @Override
     public void createParkingSpace(String city, String address, String size_sqm, String price_ph, String userId) {
         User byUser = userRepository.getUserById(Integer.parseInt(userId));
@@ -68,4 +91,11 @@ public class ParkingSpaceRepository implements IParkingSpaceRepository{
         parkingSpaces.add(space);
         writeJson();
     }
+
+    @Override
+    public void deleteParkingSpace(int spaceId) {
+        parkingSpaces.remove(confirmParking(spaceId);
+    }
+
+
 }
