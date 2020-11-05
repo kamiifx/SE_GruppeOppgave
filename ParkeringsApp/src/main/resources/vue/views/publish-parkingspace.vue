@@ -1,6 +1,6 @@
 <template id="publish-parkingspace" @ParkingSpace-submitted="createParkingSpace">
   <div class="form-style">
-    <h2>Create new parkingspace {{user.id}}</h2>
+    <h2>Create new parkingspace, {{user.name}}</h2>
     <form class="create" @submit="checkForm" :action=`/api/app/${user.id}/publish_parkingspace` method="post">
       <div v-if="errors.length">
         <b>Please correct the following error(s):</b>
