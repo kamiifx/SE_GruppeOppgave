@@ -7,10 +7,16 @@
                 <button class="button-user-login">Logout</button>
             </div>
         </header>
+        <aside>
+            <div class="brukerInfo">
+                <p>Bruker info:</p>
+                <p>{{users.name}} {{users.lastName}}</p>
+                <p>{{users.mail}}</p>
+            </div>
+
+        </aside>
 
         <main>
-            <p>Bruker info:</p>
-            <p>{{user.name}} {{user.lastName}}</p>
 
         </main>
 
@@ -78,6 +84,11 @@
     .button-user-login{
         margin-left: 15px;
         background-color: #1dd1a1;
+    }
+
+    aside{
+        position: absolute;
+        top:7%;
     }
 
 </style>
