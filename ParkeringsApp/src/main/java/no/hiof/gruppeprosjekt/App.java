@@ -5,6 +5,7 @@ import io.javalin.http.Handler;
 import io.javalin.plugin.rendering.vue.VueComponent;
 import no.hiof.gruppeprosjekt.controllers.ParkingSpaceController;
 import no.hiof.gruppeprosjekt.controllers.UserController;
+import no.hiof.gruppeprosjekt.repositories.AppUserDatabase;
 import no.hiof.gruppeprosjekt.repositories.AppUserJson;
 import no.hiof.gruppeprosjekt.repositories.ParkingSpaceRepository;
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +16,10 @@ public class App {
         AppUserJson userJson = new AppUserJson();
         AppUserJson userJsonRepo = new AppUserJson();
         UserController userController = new UserController(userJsonRepo);
+        AppUserDatabase userDatabe = new AppUserDatabase();
 
+        userDatabe.connectDatabase();
+        userDatabe.createUserTable();
         //Repo + controller for publisering av parkeringsplass
         ParkingSpaceRepository parkingSpaceRepository = new ParkingSpaceRepository(userJsonRepo);
         ParkingSpaceController parkingSpaceController = new ParkingSpaceController(parkingSpaceRepository);
