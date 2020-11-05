@@ -47,6 +47,7 @@ public class ParkingSpaceRepository implements IParkingSpaceRepository{
     }
 
     @Override
+<<<<<<< HEAD
     public ParkingSpace confirmParking(int spaceId) {
         for(ParkingSpace parkingspace : parkingSpaces){
             if(parkingspace.getSpaceId()== spaceId){
@@ -67,6 +68,22 @@ public class ParkingSpaceRepository implements IParkingSpaceRepository{
 
 
 
+=======
+    public ArrayList<ParkingSpace> getAllSpaces() {
+        return(parkingSpaces);
+    }
+
+    @Override
+    public ParkingSpace getSpaceById(int id) {
+        for(ParkingSpace space : parkingSpaces) {
+            if(space.getSpaceId() == id) {
+                return space;
+            }
+        }
+        return null;
+    }
+
+>>>>>>> main
     @Override
     public void createParkingSpace(String city, String address, String size_sqm, String price_ph, String userId) {
         User byUser = userRepository.getUserById(Integer.parseInt(userId));

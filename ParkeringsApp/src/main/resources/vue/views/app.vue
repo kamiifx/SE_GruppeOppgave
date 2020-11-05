@@ -14,6 +14,8 @@
                 <p>{{users.name}} {{users.lastName}}</p>
                 <p>{{users.mail}}</p>
             </div>
+            <a id="publishSpaceButton" :href=`${users.id}/publish-parkingspace`>Legg ut parkeringsplass</a>
+            <a id="rentSpaceButton" :href=`${users.id}/parkingspaces`>Lei en parkeringsplass</a>
 
         </aside>
 
@@ -90,6 +92,42 @@
     aside{
         position: absolute;
         top:7%;
+    }
+
+    #publishSpaceButton {
+      font-family: 'Roboto', sans-serif;
+      padding: 12px 30px;
+      background-color: #54a0ff;
+      color: white;
+      text-decoration: none;
+      border: none;
+      text-align: center;
+      display: inline-block;
+      font-size: 16px;
+      transition-duration: 0.3s;
+    }
+
+    #publishSpaceButton:hover {
+      background-color: #4a69bd;
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);;
+    }
+
+    #rentSpaceButton {
+      font-family: 'Roboto', sans-serif;
+      padding: 12px 30px;
+      background-color: #54a0ff;
+      color: white;
+      text-decoration: none;
+      border: none;
+      text-align: center;
+      display: inline-block;
+      font-size: 16px;
+      transition-duration: 0.3s;
+    }
+
+    #rentSpaceButton:hover {
+      background-color: #4a69bd;
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);;
     }
 
 </style>
