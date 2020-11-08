@@ -11,4 +11,6 @@ public interface IParkingSpaceRepository {
     ParkingSpace getSpaceById(int id);
     void createParkingSpace(String city, String address, String size_sqm, String price_ph, String userId);
     void deleteParkingSpace(int spaceId);
+
+    void deleteUser(String user);
 }

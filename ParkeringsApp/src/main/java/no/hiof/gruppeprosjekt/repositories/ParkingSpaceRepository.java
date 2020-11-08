@@ -96,5 +96,9 @@ public class ParkingSpaceRepository implements IParkingSpaceRepository{
         parkingSpaces.remove(confirmParking(spaceId));
     }
 
+    public void deleteUser(String userId)
+    {
+        userRepository.deleteUserById(userId);
 
+    }
 }

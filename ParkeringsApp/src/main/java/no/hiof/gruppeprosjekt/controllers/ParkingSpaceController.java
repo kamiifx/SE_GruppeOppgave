@@ -29,4 +29,10 @@ public class ParkingSpaceController {
         ParkingSpaceRepository.createParkingSpace(ctx.formParam("city"), ctx.formParam("address"), ctx.formParam("size_sqm"), ctx.formParam("price_ph"), user);
         ctx.redirect("/app/" + user + "/parkingspaces");
     }
+
+    public void deleteUser(Context ctx) {
+        String user = ctx.pathParam("userId");
+        ParkingSpaceRepository.deleteUser(user);
+        ctx.redirect("/");
+    }
 }

@@ -78,5 +78,11 @@ public class App {
         });
         app.get("/app/:userId/parkingspaces/:spaceId", new VueComponent("parking-space-detail"));
 
+        app.get("/api/:userId/delete", new Handler() {
+            @Override
+            public void handle(@NotNull Context ctx) throws Exception {
+                parkingSpaceController.deleteUser(ctx);
+            }
+        });
     }
 }

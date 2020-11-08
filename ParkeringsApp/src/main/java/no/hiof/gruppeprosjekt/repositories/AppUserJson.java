@@ -72,6 +72,7 @@ public class AppUserJson implements IUserRepository{
         return null;
     }
 
+
     @Override
     public User getUserById(int id) {
         for (User user : jUser){
@@ -104,6 +105,12 @@ public class AppUserJson implements IUserRepository{
     public void deleteUser(String email) {
         jUser.remove(getUserByMail(email));
         writeArrayToJson(jUser);
+    }
+
+    @Override
+    public void deleteUserById(String userId) {
+        User u = getUserById(Integer.parseInt(userId));
+        deleteUser(u.getMail());
     }
 
     @Override
