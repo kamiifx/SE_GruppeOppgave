@@ -100,4 +100,9 @@ public class AppUserDatabase implements IUserRepository {
     public void deleteUserById(String userId) {
 
     }
+
+    @Override
+    public void updateUser(String id, String name, String lastName, String password, String email) {
+
+    }
 }

@@ -44,4 +44,16 @@ public class UserController {
         context.json(getUser);
     }
 
+    public void updateUser(Context context) {
+        String id = context.pathParam("userId");
+        String name = context.formParam("first_name");
+        String lastName = context.formParam("last_name");
+        String password = context.formParam("password");
+        String email = context.formParam("email");
+
+
+        userJsonRepo.updateUser(id, name, lastName, password, email);
+
+        context.redirect("/app/" + id);
+    }
 }

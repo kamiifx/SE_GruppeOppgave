@@ -3,11 +3,13 @@
         <header>
             <img src="https://www.flaticon.com/svg/static/icons/svg/1159/1159499.svg" alt="logo">
             <h3>Parkering<br> App</h3>
-            <div class="logins">
-                <button class="button-admin-login">Admin Login</button>
-                <button class="button-user-login" v-on:click="modalActive = true">Login</button>
-            </div>
         </header>
+      <br> <br>
+      <div class="btn-group">
+        <button >Admin Login</button>
+        <button v-on:click="modalActive = true">Login</button>
+      </div>
+
         <div class="modalFormWrap" v-bind:style='{display:(modalActive?"block":"none")}'>
             <div v-bind:style='{height:(register?"500px":"320px")}' class="modalForm">
                 <div class="modalHeader">
@@ -90,6 +92,8 @@
         height: 30px;
         border-radius: 5px;
         border-style: none;
+        margin: 10px;
+        margin-right : 20px;
     }
     header button:hover{
         cursor: pointer;
@@ -97,14 +101,16 @@
         background-color: #b8e994;
     }
     .logins{
-        margin-left: 84%;
+        margin-left: 50px;
     }
+
     .button-user-login{
         margin-left: 15px;
         background-color: #1dd1a1;
     }
     .button-admin-login{
         background-color: #54a0ff;
+        margin : 10px;
     }
 
     .modalFormWrap{
@@ -118,8 +124,8 @@
     }
     .modalForm{
         z-index: 9;
-        position: absolute;
-        top: 30%;
+        position: relative;
+        top: 5%;
         left: 40%;
         background-color: white;
         width: 340px;
@@ -187,6 +193,33 @@
     }
     .userRegister:hover{
         cursor: pointer;
+    }
+
+    .btn-group button {
+      background-color: #4CAF50; /* Green background */
+      border: 1px solid green; /* Green border */
+      color: white; /* White text */
+      padding: 10px 24px; /* Some padding */
+      cursor: pointer; /* Pointer/hand icon */
+      float: left; /* Float the buttons side by side */
+
+      margin:10px;
+    }
+
+    .btn-group button:not(:last-child) {
+      border-right: none; /* Prevent double borders */
+    }
+
+    /* Clear floats (clearfix hack) */
+    .btn-group:after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    /* Add a background color on hover */
+    .btn-group button:hover {
+      background-color: #3e8e41;
     }
 
 </style>

@@ -5,6 +5,7 @@
             <h3>Parkering<br> App</h3>
             <div class="logins">
                 <button class="button-user-login">Logout</button>
+                <button class="button- "></button>
             </div>
         </header>
         <aside>
@@ -13,8 +14,10 @@
                 <p>{{users.name}} {{users.lastName}}</p>
                 <p>{{users.mail}}</p>
             </div>
-            <a id="publishSpaceButton" :href=`${users.id}/publish-parkingspace`>Publish parking space</a>
-            <a id="rentSpaceButton" :href=`${users.id}/parkingspaces`>Rent a parking space</a>
+            <a id="publishSpaceButton" :href=`${users.id}/publish-parkingspace`>Legg ut parkeringsplass</a>
+            <a id="rentSpaceButton" :href=`${users.id}/parkingspaces`>Lei en parkeringsplass</a>
+            <a id="deleteUserButton" :href=`/api/${users.id}/delete`>Delete user</a>
+            <a id="updateUserButton" :href=`${users.id}/user-update`>Update user</a>
 
         </aside>
 
@@ -85,7 +88,7 @@
     }
     .button-user-login{
         margin-left: 15px;
-        background-color: #1dd1a1;
+        background-color: #4CAF50;
     }
 
     aside{
@@ -94,8 +97,9 @@
     }
 
     #publishSpaceButton {
+      font-family: 'Roboto', sans-serif;
       padding: 12px 30px;
-      background-color: #54a0ff;
+      background-color: #4CAF50;
       color: white;
       text-decoration: none;
       border: none;
@@ -111,8 +115,35 @@
     }
 
     #rentSpaceButton {
+      font-family: 'Roboto', sans-serif;
       padding: 12px 30px;
-      background-color: #54a0ff;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border: none;
+      text-align: center;
+      display: inline-block;
+      font-size: 16px;
+      transition-duration: 0.3s;
+    }
+
+    #deleteUserButton {
+      font-family: 'Roboto', sans-serif;
+      padding: 12px 30px;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border: none;
+      text-align: center;
+      display: inline-block;
+      font-size: 16px;
+      transition-duration: 0.3s;
+    }
+
+    #updateUserButton {
+      font-family: 'Roboto', sans-serif;
+      padding: 12px 30px;
+      background-color: #4CAF50;
       color: white;
       text-decoration: none;
       border: none;

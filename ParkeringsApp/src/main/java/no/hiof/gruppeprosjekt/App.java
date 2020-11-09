@@ -48,6 +48,7 @@ public class App {
                 userController.registerUser(ctx);
             }
         });
+
         //app user Page
         app.get("/app/:userId",new VueComponent("app"));
         app.get("/api/users/:userId", new Handler() {
@@ -59,6 +60,9 @@ public class App {
         //Side for publisering av parkeringsplasser
         app.get("/app/:userId/publish-parkingspace", new VueComponent("publish-parkingspace"));
         app.post("/api/app/:userId/publish_parkingspace", parkingSpaceController::createParkingSpace);
+
+        app.get("/app/:userId/user-update", new VueComponent("user-update"));
+        app.post("/api/:userId/user-update", userController::updateUser);
 
         //Handler for å hente alle parkeringsplasser
         app.get("/api/parking-spaces", new Handler() {

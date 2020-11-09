@@ -17,7 +17,7 @@
             <a id="publishSpaceButton" :href=`${users.id}/publish-parkingspace`>Legg ut parkeringsplass</a>
             <a id="rentSpaceButton" :href=`${users.id}/parkingspaces`>Lei en parkeringsplass</a>
             <a id="deleteUserButton" :href=`/api/${users.id}/delete`>Delete user</a>
-            <a id="updateUserButton" :href=`/api/${users.id}/update`>Update user</a>
+            <a id="updateUserButton" :href=`${users.id}/user-update`>Update user</a>
 
         </aside>
 

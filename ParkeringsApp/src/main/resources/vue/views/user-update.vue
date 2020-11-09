@@ -1,80 +1,78 @@
-<template id="publish-parkingspace" @ParkingSpace-submitted="createParkingSpace">
+<template id="user-update" @ParkingSpace-submitted="updateUser">
   <div>
-  <div id="header">
-    <img src="https://www.flaticon.com/svg/static/icons/svg/1159/1159499.svg" alt="logo">
-    <h3>Parkering<br> App</h3>
-    <div class="logins">
-      <button class="button-user-login">Logout</button>
-    </div>
-  </div>
-  <div class="form-style">
-    <h2>Legg ut din parkeringsplass, {{user.name}}</h2>
-    <form class="create" @submit="checkForm" :action=`/api/app/${user.id}/publish_parkingspace` method="post">
-      <div v-if="errors.length">
-        <b>Please correct the following error(s):</b>
-        <ul>
-          <li v-for="error in errors">{{ error }}</li>
-        </ul>
+    <div id="header">
+      <img src="https://www.flaticon.com/svg/static/icons/svg/1159/1159499.svg" alt="logo">
+      <h3>User update<br> App</h3>
+      <div class="logins">
+        <button class="button-user-login">Logout</button>
       </div>
+    </div>
+    <div class="form-style">
+      <h2>Update user, {{user.name}}</h2>
+      <form class="create" @submit="checkForm" :action=`/api/${user.id}/user-update` method="post">
+        <p>
+          <label for="userId">User Id<label>
+            <input type="text" name="id" id="userId" v-model="userId"  readonly>
+        </p>
 
-      <p>
-        <label for="city">By<label>
-          <input type="text" name="city" id="city" v-model="city">
-      </p>
+        <p>
+          <label for="email">Email<label>
+            <input type="text" name="email" id="email" v-model="email">
+        </p>
 
-      <p>
-        <label for="address">Adresse<label>
-          <input type="text" name="address" id="address" v-model="address">
-      </p>
+        <p>
+          <label for="first_name">First Name<label>
+            <input type="text" name="first_name" id="first_name" v-model="first_name">
+        </p>
 
-      <p>
-        <label for="size_sqm">Størrelse (m<sup>2</sup>)<label>
-          <input type="number" name="size_sqm" id="size_sqm" v-model="size_sqm">
-      </p>
+        <p>
+        <label for="last_name">Last Name<label>
+          <input type="text" name="last_name" id="last_name" v-model="last_name">
+        </p>
 
-      <p>
-        <label for="price_ph">Pris per time<label>
-          <input type="number" name="price_ph" id="price_ph" v-model="price_ph">
-      </p>
+        <p>
+          <label for="password">Password<label>
+            <input type="password" name="password" id="password" v-model="password">
+        </p>
+        <p>
+          <input type="submit" value="Update user">
+        </p>
 
-      <p>
-        <input type="submit" value="Publiser plass">
-      </p>
-
-    </form>
-  </div>
+      </form>
+    </div>
   </div>
 
 </template>
 <script>
-Vue.component("publish-parkingspace", {
-  template: "#publish-parkingspace",
+Vue.component("user-update", {
+  template: "#user-update",
   data: () => ({
-    city: null,
-    user: null,
-    address: null,
-    size_sqm: null,
-    price_ph: null,
-    errors: []
+    user : null,
+    userId: null,
+    email: null,
+    first_name: null,
+    last_name: null,
+    password: null
   }),
   created() {
     const userId = this.$javalin.pathParams["userId"];
     fetch(`/api/users/${userId}`)
-      .then(res => res.json())
-      .then(res => {
-        this.user = res;
-      }).catch(() => alert("Error getting user"));
+        .then(res => res.json())
+        .then(res => {
+          this.user = res;
+          this.userId = res.id;
+          this.email = res.mail;
+          this.first_name = res.name;
+          this.last_name = res.lastName;
+          this.password = res.password;
+
+        }).catch(() => alert("Error getting user"));
+
+
   },
   methods: {
     checkForm: function (e) {
-      const urlRegex = "/^(?:(?:(?:https?|ftp):)?\\/\\/)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\\.(?:[a-z\u00a1-\uffff]{2,})))(?::\\d{2,5})?(?:[/?#]\\S*)?$/i";
-      if (this.city && this.address && this.size_sqm && this.price_ph) return true;
-      this.errors = [];
-      if (!this.city) this.errors.push("By er et påkrevd felt");
-      if (!this.address) this.errors.push("Adresse er et påkrevd felt");
-      if (!this.size_sqm) this.errors.push("Størrelse er et påkrevd felt");
-      if (!this.price_ph) this.errors.push("Pris er et påkrevd felt");
-      e.preventDefault();
+
     }
   }
 });

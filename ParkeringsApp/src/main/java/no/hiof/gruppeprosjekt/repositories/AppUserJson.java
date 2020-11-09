@@ -114,6 +114,15 @@ public class AppUserJson implements IUserRepository{
     }
 
     @Override
+    public void updateUser(String id, String name, String lastName, String password, String email) {
+        User user = getUserById(Integer.parseInt(id));
+        user.setName(name);
+        user.setLastName(lastName);
+        user.setPassword(password);
+        user.setMail(email);
+    }
+
+    @Override
     public void updateUser(String name, String lastName, String password, String email) {
         User updateUser = getUserByMail(email);
         updateUser.setName(name);
