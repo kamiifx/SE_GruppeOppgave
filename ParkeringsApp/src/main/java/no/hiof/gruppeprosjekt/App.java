@@ -4,29 +4,39 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import io.javalin.plugin.rendering.vue.VueComponent;
 import no.hiof.gruppeprosjekt.controllers.ParkingSpaceController;
+import no.hiof.gruppeprosjekt.controllers.RentalController;
 import no.hiof.gruppeprosjekt.controllers.UserController;
 import no.hiof.gruppeprosjekt.repositories.AppUserDatabase;
-import no.hiof.gruppeprosjekt.repositories.AppUserJson;
-import no.hiof.gruppeprosjekt.repositories.ParkingSpaceRepository;
+import no.hiof.gruppeprosjekt.repositories.ParkingSpaceDatabase;
+import no.hiof.gruppeprosjekt.repositories.RentalDatabase;
 import org.jetbrains.annotations.NotNull;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 
 public class App {
-    public static void main(String[] args) {
-        AppUserJson userJson = new AppUserJson();
-        AppUserJson userJsonRepo = new AppUserJson();
-        UserController userController = new UserController(userJsonRepo);
-        AppUserDatabase userDatabe = new AppUserDatabase();
+    public static void main(String[] args) throws ParseException {
+        /*AppUserJson userJson = new AppUserJson();
+        AppUserJson userJsonRepo = new AppUserJson();*/
+        AppUserDatabase userDBRepo = new AppUserDatabase();
+        UserController userController = new UserController(userDBRepo);
 
-        userDatabe.connectDatabase();
-        userDatabe.createUserTable();
         //Repo + controller for publisering av parkeringsplass
-        ParkingSpaceRepository parkingSpaceRepository = new ParkingSpaceRepository(userJsonRepo);
+        ParkingSpaceDatabase parkingSpaceRepository = new ParkingSpaceDatabase(userDBRepo);
         ParkingSpaceController parkingSpaceController = new ParkingSpaceController(parkingSpaceRepository);
+
+        RentalDatabase rentalDatabase = new RentalDatabase(userDBRepo, parkingSpaceRepository);
+        RentalController rentalController = new RentalController(rentalDatabase);
+
+        //KOBLE TIL DATABASE
+        String url = "jdbc:sqlite:appdb.sqlite";
+        connectDB(url);
 
         Javalin app = Javalin.create().start(7000);
         app.config.enableWebjars();
-
 
         //login side
         app.get("/", new VueComponent("<app-login><app-login>"));
@@ -81,12 +91,36 @@ public class App {
             }
         });
         app.get("/app/:userId/parkingspaces/:spaceId", new VueComponent("parking-space-detail"));
+        app.post("/api/app/:userId/parkingspaces/:spaceId/rentspace", new Handler() {
+            @Override
+            public void handle(@NotNull Context ctx) throws Exception {
+                rentalController.createRentalAgreement(ctx);
+            }
+        });
 
         app.get("/api/:userId/delete", new Handler() {
             @Override
             public void handle(@NotNull Context ctx) throws Exception {
-                parkingSpaceController.deleteUser(ctx);
+                userController.deleteUser(ctx);
             }
         });
+    }
+
+    public static void connectDB(String url) {
+        Connection connect = null;
+        try {
+            connect = DriverManager.getConnection(url);
+            System.out.println("Database connected");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            try{
+                if (connect != null){
+                    connect.close();
+                }
+            }catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

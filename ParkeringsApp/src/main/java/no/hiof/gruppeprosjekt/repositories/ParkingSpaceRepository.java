@@ -1,3 +1,4 @@
+/*
 package no.hiof.gruppeprosjekt.repositories;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -102,3 +103,4 @@ public class ParkingSpaceRepository implements IParkingSpaceRepository{
 
     }
 }
+*/

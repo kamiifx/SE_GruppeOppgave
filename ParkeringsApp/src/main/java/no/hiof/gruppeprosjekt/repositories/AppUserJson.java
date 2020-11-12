@@ -106,12 +106,12 @@ public class AppUserJson implements IUserRepository{
         jUser.remove(getUserByMail(email));
         writeArrayToJson(jUser);
     }
-
+/*
     @Override
     public void deleteUserById(String userId) {
         User u = getUserById(Integer.parseInt(userId));
         deleteUser(u.getMail());
-    }
+    }*/
 
     @Override
     public void updateUser(String id, String name, String lastName, String password, String email) {
@@ -122,13 +122,4 @@ public class AppUserJson implements IUserRepository{
         user.setMail(email);
     }
 
-    @Override
-    public void updateUser(String name, String lastName, String password, String email) {
-        User updateUser = getUserByMail(email);
-        updateUser.setName(name);
-        updateUser.setLastName(lastName);
-        updateUser.setPassword(password);
-        updateUser.setMail(password);
-        writeArrayToJson(jUser);
-    }
 }
