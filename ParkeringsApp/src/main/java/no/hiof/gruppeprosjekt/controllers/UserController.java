@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Random;
 
 public class UserController {
-    private IUserRepository userJsonRepo;
+    private IUserRepository userRepo;
 
-    public UserController(IUserRepository userJsonRepo){this.userJsonRepo = userJsonRepo;}
+    public UserController(IUserRepository userRepo){this.userRepo = userRepo;}
 
     public void getAllUsers(Context context){
-        List<User> getAllUser = userJsonRepo.getAllUsers();
+        List<User> getAllUser = userRepo.getAllUsers();
         context.json(getAllUser);
     }
 
@@ -25,22 +25,21 @@ public class UserController {
         String password = context.formParam("password");
         String email = context.formParam("email");
         int id = rand.nextInt(100);
-        userJsonRepo.registerUser(id,name,lastName,password,email);
+        userRepo.registerUser(id,name,lastName,password,email);
 
-        context.redirect("/api/users");
+        context.redirect("/app/" + id);
     }
 
     public void loginUser(Context context){
         String email = context.formParam("email");
-        int id = userJsonRepo.getUserByMail(email).getId();
-
+        int id = userRepo.getUserByMail(email).getId();
 
         context.redirect("/app/" + id);
     }
 
     public void getSingleUser(Context context){
         String userId = context.pathParam("userId");
-        User getUser = userJsonRepo.getUserById(Integer.parseInt(userId));
+        User getUser = userRepo.getUserById(Integer.parseInt(userId));
         context.json(getUser);
     }
 
@@ -51,9 +50,14 @@ public class UserController {
         String password = context.formParam("password");
         String email = context.formParam("email");
 
-
-        userJsonRepo.updateUser(id, name, lastName, password, email);
+        userRepo.updateUser(id, name, lastName, password, email);
 
         context.redirect("/app/" + id);
+    }
+
+    public void deleteUser(Context ctx) {
+        String user = ctx.pathParam("userId");
+        userRepo.deleteUser(user);
+        ctx.redirect("/");
     }
 }
