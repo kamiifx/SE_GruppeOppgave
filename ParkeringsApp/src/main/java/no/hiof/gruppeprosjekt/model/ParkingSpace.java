@@ -9,7 +9,7 @@ public class ParkingSpace {
     private double price_ph;
     private int spaceId;
     private User byUser;
-    boolean available;
+    byte available;
 
     Random rand = new Random();
 
@@ -20,7 +20,7 @@ public class ParkingSpace {
         this.price_ph = price_ph;
         this.byUser = byUser;
         spaceId = rand.nextInt(1000);
-        this.available = true;
+        this.available = 1;
     }
 
     //Tom konstruktør for lesing av .json filer
@@ -76,12 +76,16 @@ public class ParkingSpace {
         this.byUser = byUser;
     }
 
-    public boolean isAvailable() {
+    public byte isAvailable() {
         return available;
     }
 
-    public void setAvailable(boolean available) {
+    public void setAvailable(byte available) {
         this.available = available;
+    }
+
+    public byte getAvailable() {
+        return available;
     }
 
     @Override
