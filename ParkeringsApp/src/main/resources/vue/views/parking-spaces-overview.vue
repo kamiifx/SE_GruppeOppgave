@@ -9,7 +9,7 @@
       </div>
     </header>
     <main>
-      <h1>Parkeringsplasser</h1>
+      <h1>Ledige parkeringsplasser</h1>
       <ul class="parking-spaces-overview-list">
         <li v-for="parkingspace in parkingspaces">
           <a :href=`/app/${userId}/parkingspaces/${parkingspace.spaceId}`>

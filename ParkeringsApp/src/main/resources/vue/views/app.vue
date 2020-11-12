@@ -14,11 +14,12 @@
                 <p>{{users.name}} {{users.lastName}}</p>
                 <p>{{users.mail}}</p>
             </div>
+          <div id = userOperations>
             <a id="publishSpaceButton" :href=`${users.id}/publish-parkingspace`>Legg ut parkeringsplass</a>
             <a id="rentSpaceButton" :href=`${users.id}/parkingspaces`>Lei en parkeringsplass</a>
             <a id="deleteUserButton" :href=`/api/${users.id}/delete`>Delete user</a>
             <a id="updateUserButton" :href=`${users.id}/user-update`>Update user</a>
-
+          </div>
         </aside>
 
         <main>
@@ -156,6 +157,16 @@
     #rentSpaceButton:hover {
       background-color: #4a69bd;
       box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);;
+    }
+
+    .brukerInfo {
+      position: relative;
+      top: 100px;
+    }
+
+    #userOperations {
+      position: relative;
+      top: 120px;
     }
 
 </style>
