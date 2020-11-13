@@ -11,7 +11,5 @@ public interface IUserRepository {
     void loginUser(String email, String password);
     void registerUser(int id,String name,String lastName,String password, String email);
     void deleteUser(String email);
-    //void updateUser(String name,String lastName,String password, String email);
-    //void deleteUserById(String userId);
     void updateUser(String id, String name, String lastName, String password, String email);
 }

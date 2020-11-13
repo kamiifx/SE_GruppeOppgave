@@ -1,3 +1,4 @@
+/*
 package no.hiof.gruppeprosjekt.repositories;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,8 +34,10 @@ public class AppUserJson implements IUserRepository{
         File fileOfJson = new File("jsonUsers");
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            /*objectMapper.findAndRegisterModules();
-            objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);*/
+            */
+/*objectMapper.findAndRegisterModules();
+            objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);*//*
+
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(fileOfJson, jUser);
 
         } catch (IOException e) {
@@ -106,12 +109,14 @@ public class AppUserJson implements IUserRepository{
         jUser.remove(getUserByMail(email));
         writeArrayToJson(jUser);
     }
+*/
 /*
     @Override
     public void deleteUserById(String userId) {
         User u = getUserById(Integer.parseInt(userId));
         deleteUser(u.getMail());
-    }*/
+    }*//*
+
 
     @Override
     public void updateUser(String id, String name, String lastName, String password, String email) {
@@ -123,3 +128,4 @@ public class AppUserJson implements IUserRepository{
     }
 
 }
+*/
