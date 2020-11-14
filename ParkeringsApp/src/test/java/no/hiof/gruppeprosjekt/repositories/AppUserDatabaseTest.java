@@ -9,125 +9,105 @@ import java.util.ArrayList;
 class AppUserDatabaseTest {
 
     AppUserDatabase userDB = new AppUserDatabase("jdbc:sqlite:testappdb.sqlite");
+    User ola;
+    User kari;
 
     @BeforeEach
+    public void setup() {
+        //Databasen skal alltid inneholde brukerne Ola og Kari
 
+        ola = new User(1, "Ola", "Nordmann", "passord123", "ola_nordmann@gmail.com");
+        kari = new User(2, "Kari", "Nordmann", "drossap", "kari@gmail.com");
+
+        //Registreringsfunksjonen testes lenger nede
+        userDB.registerUser(ola.getId(), ola.getName(), ola.getLastName(), ola.getPassword(), ola.getMail());
+        userDB.registerUser(kari.getId(), kari.getName(), kari.getLastName(), kari.getPassword(), kari.getMail());
+    }
     @Test
     public void get_all_correct_users() {
-        User ola = new User(1, "Ola", "Nordmann", "passord123", "ola_nordmann@gmail.com");
-        userDB.registerUser(ola.getId(), ola.getName(), ola.getLastName(), ola.getPassword(), ola.getMail());
-
-        User kari = new User(2, "Kari", "Nordmann", "drossap", "kari@gmail.com");
-        userDB.registerUser(kari.getId(), kari.getName(), kari.getLastName(), kari.getPassword(), kari.getMail());
-
-        /*I databasen har jeg nå brukerne ola og Kari, disse er også brukere som jeg forventer så jeg legger dem til en liste
-         * og sammenligner dem med den listen jeg får når jeg kaller på funksjonen som hente ralle brukeren som ligger i databasen*/
-
+        //Alle brukere som jeg forventer er Ola og Kari (siden dem alltid er i DB)
         ArrayList<User> expectedUsers = new ArrayList<>();
         expectedUsers.add(ola);
         expectedUsers.add(kari);
 
+        //Henter faktisk alle brukere i databasen
         ArrayList<User> actualUsers = new ArrayList<>(userDB.getAllUsers());
 
+        //Gjør om arrayane til strenger og sammenligner dem
         Assert.assertEquals(expectedUsers.toString(), actualUsers.toString());
-
-        userDB.deleteUser("1");
-        userDB.deleteUser("2");
     }
 
     @Test
     public void get_correct_user_by_mail() {
-        User ola = new User(1, "Ola", "Nordmann", "passord123", "ola_nordmann@gmail.com");
-        userDB.registerUser(ola.getId(), ola.getName(), ola.getLastName(), ola.getPassword(), ola.getMail());
-
+        //Sammenligner ID for å sjekke om begge brukere er det samme. Siden ID er noe som er unikt for alle brukere
+        //godkjenner vi at denne sammenligningen er autentisk
         Assert.assertEquals(ola.getId(), userDB.getUserByMail("ola_nordmann@gmail.com").getId());
-
-        userDB.deleteUser("1");
     }
 
     @Test
     public void get_nothing_by_getting_user_with_invalid_mail() {
-        User ola = new User(1, "Ola", "Nordmann", "passord123", "ola_nordmann@gmail.com");
-        userDB.registerUser(ola.getId(), ola.getName(), ola.getLastName(), ola.getPassword(), ola.getMail());
-
+        //Ingen i databasen har denne eposten
         Assert.assertNull(userDB.getUserByMail("ola_nordmann@hotmail.com"));
-
-        userDB.deleteUser("1");
     }
 
     @Test
     public void get_correct_user_by_id() {
-        User kari = new User(2, "Kari", "Nordmann", "drossap", "kari@gmail.com");
-        userDB.registerUser(kari.getId(), kari.getName(), kari.getLastName(), kari.getPassword(), kari.getMail());
-
-        Assert.assertEquals(kari.getName(), userDB.getUserById(2).getName());
-        userDB.deleteUser("2");
+        //Kari sin ID = 2
+        //Sammenligningen foregår vet at ID'en til Kari som opprettes sammenlignes med ID'en som vi får fra databasen
+        Assert.assertEquals(kari.getId(), userDB.getUserById(2).getId());
     }
 
     @Test
     public void get_nothing_by_getting_user_with_invalid_id() {
-        User kari = new User(2, "Kari", "Nordmann", "drossap", "kari@gmail.com");
-        userDB.registerUser(kari.getId(), kari.getName(), kari.getLastName(), kari.getPassword(), kari.getMail());
-
-        //Databasen inneholder bare Kari med id 2, jeg vil hente 10 (som ikke finnes) og da får jeg NULL
+        //Ingen i databasen har ID = 10
         Assert.assertNull(userDB.getUserById(10));
 
-        userDB.deleteUser("2");
     }
 
     @Test
     public void user_logged_in_with_correct_credentials() {
-        User kari = new User(2, "Kari", "Nordmann", "drossap", "kari@gmail.com");
-        userDB.registerUser(kari.getId(), kari.getName(), kari.getLastName(), kari.getPassword(), kari.getMail());
+        //Innlogging til Kari
 
         String emailInput = "kari@gmail.com";
         String passordInput = "drossap";
 
         Assert.assertTrue(userDB.loginUser(emailInput, passordInput));
-
-        userDB.deleteUser("2");
     }
 
     @Test
-    public void user_logged_in_with_invalid_credentials() {
-        User kari = new User(2, "Kari", "Nordmann", "drossap", "kari@gmail.com");
-        userDB.registerUser(kari.getId(), kari.getName(), kari.getLastName(), kari.getPassword(), kari.getMail());
-
+    public void user_logged_in_with_invalid_password() {
         String emailInput = "kari@gmail.com";
         String passordInput = "FeilPassord"; //Passordet til Kari er "drossap"
 
         Assert.assertFalse(userDB.loginUser(emailInput, passordInput));
 
-        userDB.deleteUser("2");
+        //Funksjonen for å logge inn en bruker vil alltid hente en bruker ved å kalle funksjonen "getUserByMail()".
+        //I testen "get_nothing_by_getting_user_with_invalid_mail()" vises det at ingen brukere hentes dersom
+        //eposten ikke samsvarer med noen sine i systemet, dermed vil ingen logges inn ved å skrive inn feil epost
     }
 
     @Test
     public void user_is_registered_and_added_to_db() {
-        User ola = new User();
-        ola.setId(1);
-        ola.setName("Ola");
-        ola.setLastName("Nordmann");
-        ola.setPassword("passord123");
-        ola.setMail("ola_nordmann@gmail.com");
+        User ahreketil = new User();
+        ahreketil.setId(3);
+        ahreketil.setName("Ahre-Ketil");
+        ahreketil.setLastName("Lillehagen");
+        ahreketil.setPassword("ffk123");
+        ahreketil.setMail("ahre_ketil_lillehagen@hotmail.com");
 
-        userDB.registerUser(ola.getId(), ola.getName(), ola.getLastName(), ola.getPassword(), ola.getMail());
+        userDB.registerUser(ahreketil.getId(), ahreketil.getName(), ahreketil.getLastName(), ahreketil.getPassword(), ahreketil.getMail());
 
-        //Brukere sammenlignes med ID (Dette er en attributt som er unik for alle brukere)
-        Assert.assertEquals(ola.getId(), userDB.getUserById(1).getId());
+        //ID er unike attributter i databasen, dermed brukes dette for sammenligningen av brukere
+        Assert.assertEquals(ahreketil.getId(), userDB.getUserById(3).getId());
 
-        //For alle brukere som legges/registreres inn i databasen blir også slettet slik at neste test ikke møter på samme bruker igjen
-        userDB.deleteUser("1");
+        //Ahre Ketil slettes fra systemet og vil ikke være med videre på testene, slettingen gjøres etter sammenligningen
+        //Testing for sletting gjøres nedenfor
+        userDB.deleteUser("3");
     }
 
     @Test
     public void delete_correct_user() {
-        User ola = new User(1, "Ola", "Nordmann", "passord123", "ola_nordmann@gmail.com");
-        User kari = new User(2, "Kari", "Nordmann", "drossap", "kari@gmail.com");
-        userDB.registerUser(ola.getId(), ola.getName(), ola.getLastName(), ola.getPassword(), ola.getMail());
-        userDB.registerUser(kari.getId(), kari.getName(), kari.getLastName(), kari.getPassword(), kari.getMail());
-
-        //Ola og kari er nå registrert i databasen. Se på testen "user_is_registered_and_added_to_db()"
-        //som bevis på at "registerUser" funksjonen fungerer
+        //Det er 2 brukere i databasen nå "Ola" og "Kari"
 
         //Forventer at det er 2 brukere i databasen før slettingen
         Assert.assertEquals(2, userDB.getAllUsers().size());
@@ -138,22 +118,25 @@ class AppUserDatabaseTest {
         //Forventer nå at det bare er 1 bruker siden vi fjernet en av to brukere
         Assert.assertEquals(1, userDB.getAllUsers().size());
 
-
+        //Gjenstående brukere hentes
         ArrayList<User> leftUsers = new ArrayList<>(userDB.getAllUsers());
+        //Kari er ikke en av de som gjenstår
         Assert.assertFalse(leftUsers.contains(kari));
-
-        userDB.deleteUser("1");
     }
 
     @Test
     public void user_is_updated() {
-        User ola = new User(1, "Ola", "Nordmann", "passord123", "ola_nordmann@gmail.com");
-        userDB.registerUser(ola.getId(), ola.getName(), ola.getLastName(), ola.getPassword(), ola.getMail());
+        User halvorsen = new User(22, "Ola", "Halvorsen", "halvorsen..", "halvorsen@live.no");
+        userDB.registerUser(halvorsen.getId(), halvorsen.getName(), halvorsen.getLastName(), halvorsen.getPassword(), halvorsen.getMail());
 
-        userDB.updateUser("1", "Ola", "Nordmann", "drossap", "ola_nordmann@gmail.com");
-        Assert.assertEquals("drossap", userDB.getUserById(1).getPassword());
+        //Vi oppdaterer Halvorsen til Preben Lohrengren
+        userDB.updateUser("22", "Preben", "Lohrengren", "drossap", "preben@gmail.com");
+        Assert.assertEquals("Preben", userDB.getUserById(22).getName());
+        Assert.assertEquals("Lohrengren", userDB.getUserById(22).getLastName());
+        Assert.assertEquals("drossap", userDB.getUserById(22).getPassword());
+        Assert.assertEquals("preben@gmail.com", userDB.getUserById(22).getMail());
 
-        userDB.deleteUser("1");
+        userDB.deleteUser("22");
     }
 
 }
