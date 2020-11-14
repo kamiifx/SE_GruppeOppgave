@@ -8,9 +8,10 @@ import java.util.ArrayList;
 public class AppUserDatabase implements IUserRepository {
     private User activeUser;
     private Boolean loggedin = false;
-    String url = "jdbc:sqlite:appdb.sqlite";
+    String url;
 
-    public AppUserDatabase() {
+    public AppUserDatabase(String url) {
+        this.url = url;
         createUserTable();
     }
 
@@ -104,14 +105,16 @@ public class AppUserDatabase implements IUserRepository {
     }
 
     @Override
-    public void loginUser(String email, String password) {
+    public boolean loginUser(String email, String password) {
         User user = getUserByMail(email);
         if (user.getMail().equals(email) && user.getPassword().equals(password)){
             activeUser = user;
             loggedin = true;
+            return true;
         }
         activeUser = null;
         loggedin = false;
+        return false;
     }
 
     @Override

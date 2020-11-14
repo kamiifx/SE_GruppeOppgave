@@ -21,7 +21,7 @@ public class App {
     public static void main(String[] args) throws ParseException {
         /*AppUserJson userJson = new AppUserJson();
         AppUserJson userJsonRepo = new AppUserJson();*/
-        AppUserDatabase userDBRepo = new AppUserDatabase();
+        AppUserDatabase userDBRepo = new AppUserDatabase("jdbc:sqlite:appdb.sqlite");
         UserController userController = new UserController(userDBRepo);
 
         //Repo + controller for publisering av parkeringsplass
