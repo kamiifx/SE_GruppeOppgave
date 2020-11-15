@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public interface IParkingSpaceRepository {
     ArrayList<ParkingSpace> getAllSpaces();
     ParkingSpace getSpaceById(int id);
-    void createParkingSpace(String city, String address, String size_sqm, String price_ph, String userId);
+    void createParkingSpace(int spaceId, String city, String address, String size_sqm, String price_ph, String userId);
     void updateAvailability(int id, byte notAvailable);
 
 }

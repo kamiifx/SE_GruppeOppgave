@@ -17,8 +17,8 @@
           <div id = userOperations>
             <a id="publishSpaceButton" :href=`${users.id}/publish-parkingspace`>Legg ut parkeringsplass</a>
             <a id="rentSpaceButton" :href=`${users.id}/parkingspaces`>Lei en parkeringsplass</a>
-            <a id="deleteUserButton" :href=`/api/${users.id}/delete`>Delete user</a>
-            <a id="updateUserButton" :href=`${users.id}/user-update`>Update user</a>
+            <a id="deleteUserButton" :href=`/api/${users.id}/delete`>Slett meg som bruker</a>
+            <a id="updateUserButton" :href=`${users.id}/user-update`>Oppdater brukerinfo.</a>
           </div>
         </aside>
 
@@ -128,6 +128,11 @@
       transition-duration: 0.3s;
     }
 
+    #rentSpaceButton:hover {
+      background-color: #4a69bd;
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);;
+    }
+
     #deleteUserButton {
       font-family: 'Roboto', sans-serif;
       padding: 12px 30px;
@@ -139,6 +144,11 @@
       display: inline-block;
       font-size: 16px;
       transition-duration: 0.3s;
+    }
+
+    #deleteUserButton:hover {
+      background-color: #4a69bd;
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);;
     }
 
     #updateUserButton {
@@ -154,7 +164,7 @@
       transition-duration: 0.3s;
     }
 
-    #rentSpaceButton:hover {
+    #updateUserButton:hover {
       background-color: #4a69bd;
       box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);;
     }

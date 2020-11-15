@@ -13,11 +13,12 @@ import java.util.Random;
 public class RentalDatabase implements IRentalRepository{
     private IUserRepository userRepository;
     private IParkingSpaceRepository parkingSpaceRepository;
-    String url = "jdbc:sqlite:appdb.sqlite";
+    String url;
 
-    public RentalDatabase(IUserRepository userRepo, IParkingSpaceRepository parkingSpaceRepo) {
+    public RentalDatabase(IUserRepository userRepo, IParkingSpaceRepository parkingSpaceRepo, String url) {
         this.userRepository = userRepo;
         this.parkingSpaceRepository = parkingSpaceRepo;
+        this.url = url;
         createRentalTable();
     }
 
@@ -27,8 +28,7 @@ public class RentalDatabase implements IRentalRepository{
                 + " spaceid integer NOT NULL,\n"
                 + " starttime  NOT NULL, \n"
                 + " duration text NOT NULL,\n"
-                + " rentalid integer NOT NULL, \n"
-                + " PRIMARY KEY (userid, spaceid, rentalid)"
+                + " rentalid integer NOT NULL PRIMARY KEY\n"
                 + ");";
         try {
             Connection connect = DriverManager.getConnection(url);
@@ -41,9 +41,8 @@ public class RentalDatabase implements IRentalRepository{
     }
 
     @Override
-    public void createRentalAgreement(int userId, int spaceId, int duration) {
+    public void createRentalAgreement(int rentalId,int userId, int spaceId, int duration) {
         User user = userRepository.getUserById(userId);
-        Random rand = new Random();
 
         ParkingSpace space = parkingSpaceRepository.getSpaceById(spaceId);
         parkingSpaceRepository.updateAvailability(space.getSpaceId(), (byte) 0);
@@ -60,7 +59,7 @@ public class RentalDatabase implements IRentalRepository{
             preState.setInt(2,space.getSpaceId());
             preState.setString(3, startTime.format(formatter));
             preState.setInt(4, duration);
-            preState.setInt(5, rand.nextInt(1000));
+            preState.setInt(5, rentalId);
             preState.executeUpdate();
             connect.close();
         }catch (SQLException e){

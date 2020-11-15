@@ -8,16 +8,17 @@ import java.util.ArrayList;
 
 public class ParkingSpaceDatabase implements IParkingSpaceRepository {
     private IUserRepository userRepository;
-    String url = "jdbc:sqlite:appdb.sqlite";
+    String url;
 
-    public ParkingSpaceDatabase(IUserRepository userRepository) {
+    public ParkingSpaceDatabase(IUserRepository userRepository, String url) {
         this.userRepository = userRepository;
+        this.url = url;
         createParkingSpaceTable();
     }
 
     private void createParkingSpaceTable(){
         String parkingSql = "CREATE TABLE IF NOT EXISTS parkingspace (\n"
-                + " spaceid integer PRIMARY KEY,\n"
+                + " spaceid INT PRIMARY KEY,\n"
                 + " city text NOT NULL,\n"
                 + " address text NOT NULL,\n"
                 + " sizesqm double NOT NULL, \n"
@@ -89,19 +90,20 @@ public class ParkingSpaceDatabase implements IParkingSpaceRepository {
     }
 
     @Override
-    public void createParkingSpace(String city, String address, String size_sqm, String price_ph, String userId) {
+    public void createParkingSpace(int spaceId, String city, String address, String size_sqm, String price_ph, String userId) {
         User byUser = userRepository.getUserById(Integer.parseInt(userId));
-        String sql = "INSERT INTO parkingspace(city, address, sizesqm, priceph, byuser, available) VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO parkingspace VALUES(?,?,?,?,?,?,?)";
 
         try {
             Connection connect = DriverManager.getConnection(url);
             PreparedStatement preState = connect.prepareStatement(sql);
-            preState.setString(1,city);
-            preState.setString(2,address);
-            preState.setDouble(3,Double.parseDouble(size_sqm));
-            preState.setDouble(4,Double.parseDouble(price_ph));
-            preState.setInt(5,byUser.getId());
-            preState.setByte(6, (byte) 1);
+            preState.setInt(1,spaceId);
+            preState.setString(2,city);
+            preState.setString(3,address);
+            preState.setDouble(4,Double.parseDouble(size_sqm));
+            preState.setDouble(5,Double.parseDouble(price_ph));
+            preState.setInt(6,byUser.getId());
+            preState.setByte(7, (byte) 1);
             preState.executeUpdate();
             connect.close();
         }catch (SQLException e){
@@ -127,5 +129,4 @@ public class ParkingSpaceDatabase implements IParkingSpaceRepository {
             System.out.println(e.getMessage());
         }
     }
-
 }

@@ -19,16 +19,14 @@ import java.text.ParseException;
 
 public class App {
     public static void main(String[] args) throws ParseException {
-        /*AppUserJson userJson = new AppUserJson();
-        AppUserJson userJsonRepo = new AppUserJson();*/
         AppUserDatabase userDBRepo = new AppUserDatabase("jdbc:sqlite:appdb.sqlite");
         UserController userController = new UserController(userDBRepo);
 
         //Repo + controller for publisering av parkeringsplass
-        ParkingSpaceDatabase parkingSpaceRepository = new ParkingSpaceDatabase(userDBRepo);
+        ParkingSpaceDatabase parkingSpaceRepository = new ParkingSpaceDatabase(userDBRepo, "jdbc:sqlite:appdb.sqlite");
         ParkingSpaceController parkingSpaceController = new ParkingSpaceController(parkingSpaceRepository);
 
-        RentalDatabase rentalDatabase = new RentalDatabase(userDBRepo, parkingSpaceRepository);
+        RentalDatabase rentalDatabase = new RentalDatabase(userDBRepo, parkingSpaceRepository, "jdbc:sqlite:appdb.sqlite");
         RentalController rentalController = new RentalController(rentalDatabase);
 
         //KOBLE TIL DATABASE

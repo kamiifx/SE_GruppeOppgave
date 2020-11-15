@@ -13,13 +13,13 @@ public class ParkingSpace {
 
     Random rand = new Random();
 
-    public ParkingSpace(String city, String address, double size_sqm, double price_ph, User byUser) {
+    public ParkingSpace(int spaceId ,String city, String address, double size_sqm, double price_ph, User byUser) {
+        this.spaceId = spaceId;
         this.city = city;
         this.address = address;
         this.size_sqm = size_sqm;
         this.price_ph = price_ph;
         this.byUser = byUser;
-        spaceId = rand.nextInt(1000);
         this.available = 1;
     }
 

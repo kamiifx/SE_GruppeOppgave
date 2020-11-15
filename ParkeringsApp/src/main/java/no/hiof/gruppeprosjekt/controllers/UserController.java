@@ -32,9 +32,13 @@ public class UserController {
 
     public void loginUser(Context context){
         String email = context.formParam("email");
+        String password = context.formParam("password");
         int id = userRepo.getUserByMail(email).getId();
 
-        context.redirect("/app/" + id);
+        if(userRepo.loginUser(email, password)) {
+            context.redirect("/app/" + id);
+        } else context.redirect("/");
+
     }
 
     public void getSingleUser(Context context){
