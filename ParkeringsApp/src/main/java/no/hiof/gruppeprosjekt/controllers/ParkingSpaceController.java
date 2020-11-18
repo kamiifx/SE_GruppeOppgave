@@ -27,9 +27,24 @@ public class ParkingSpaceController {
 
     public void createParkingSpace(Context ctx) {
         String user = ctx.pathParam("userId");
+
+        if (user == null)
+            user = ctx.formParam("userId");
+
         Random rand = new Random();
-        ParkingSpaceRepository.createParkingSpace(rand.nextInt(1000),ctx.formParam("city"), ctx.formParam("address"), ctx.formParam("size_sqm"), ctx.formParam("price_ph"), user);
-        ctx.redirect("/app/" + user);
+        String city = ctx.formParam("city");
+        String address = ctx.formParam("address");
+        String size_sqm = ctx.formParam("size_sqm");
+        String price_ph = ctx.formParam("price_ph");
+
+        if(city.equals("") || address.equals("") || size_sqm.equals("") || price_ph.equals("")) {
+            ctx.status(417);
+        }
+        else {
+            ParkingSpaceRepository.createParkingSpace(rand.nextInt(1000),city, address, size_sqm, price_ph, user);
+            ctx.status(201);
+            ctx.redirect("/app/" + user);
+        }
     }
 
 }

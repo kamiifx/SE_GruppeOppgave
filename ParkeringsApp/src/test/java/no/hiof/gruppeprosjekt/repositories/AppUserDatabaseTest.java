@@ -2,6 +2,8 @@ package no.hiof.gruppeprosjekt.repositories;
 
 import no.hiof.gruppeprosjekt.model.User;
 import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -23,6 +25,13 @@ class AppUserDatabaseTest {
         userDB.registerUser(ola.getId(), ola.getName(), ola.getLastName(), ola.getPassword(), ola.getMail());
         userDB.registerUser(kari.getId(), kari.getName(), kari.getLastName(), kari.getPassword(), kari.getMail());
     }
+
+    @AfterEach
+    public void teardown() {
+        userDB.deleteUser("1");
+        userDB.deleteUser("2");
+    }
+
     @Test
     public void get_all_correct_users() {
         //Alle brukere som jeg forventer er Ola og Kari (siden dem alltid er i DB)

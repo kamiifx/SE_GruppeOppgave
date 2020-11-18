@@ -4,6 +4,8 @@ import no.hiof.gruppeprosjekt.model.ParkingSpace;
 import no.hiof.gruppeprosjekt.model.User;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +33,6 @@ public class ParkingSpaceDatabaseTest {
 
         parkingDB.createParkingSpace(rodHerregaard.getSpaceId(),rodHerregaard.getCity(), rodHerregaard.getAddress(), Double.toString(rodHerregaard.getSize_sqm()), Double.toString(rodHerregaard.getPrice_ph()), Integer.toString(rodHerregaard.getByUser().getId()));
         parkingDB.createParkingSpace(haldenIshall.getSpaceId(),haldenIshall.getCity(), haldenIshall.getAddress(), Double.toString(haldenIshall.getSize_sqm()), Double.toString(haldenIshall.getPrice_ph()), Integer.toString(haldenIshall.getByUser().getId()));
-
     }
 
     @Test
