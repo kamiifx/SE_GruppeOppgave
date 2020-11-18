@@ -19,24 +19,24 @@ import java.text.ParseException;
 
 public class App {
     public static void main(String[] args) throws ParseException {
+        //Repo + controller for brukere
         AppUserDatabase userDBRepo = new AppUserDatabase("jdbc:sqlite:appdb.sqlite");
         UserController userController = new UserController(userDBRepo);
 
-        //Repo + controller for publisering av parkeringsplass
+        //Repo + controller for parkeringsplasser
         ParkingSpaceDatabase parkingSpaceRepository = new ParkingSpaceDatabase(userDBRepo, "jdbc:sqlite:appdb.sqlite");
         ParkingSpaceController parkingSpaceController = new ParkingSpaceController(parkingSpaceRepository);
 
+        //Repo + controller for leie-avtaler
         RentalDatabase rentalDatabase = new RentalDatabase(userDBRepo, parkingSpaceRepository, "jdbc:sqlite:appdb.sqlite");
         RentalController rentalController = new RentalController(rentalDatabase);
 
-        //KOBLE TIL DATABASE
         String url = "jdbc:sqlite:appdb.sqlite";
         connectDB(url);
 
         Javalin app = Javalin.create().start(7000);
         app.config.enableWebjars();
 
-        //login side
         app.get("/", new VueComponent("<app-login><app-login>"));
         app.get("/api/users", new Handler() {
             @Override
@@ -56,8 +56,6 @@ public class App {
                 userController.registerUser(ctx);
             }
         });
-
-        //app user Page
         app.get("/app/:userId",new VueComponent("app"));
         app.get("/api/users/:userId", new Handler() {
             @Override
@@ -65,14 +63,10 @@ public class App {
                 userController.getSingleUser(ctx);
             }
         });
-        //Side for publisering av parkeringsplasser
         app.get("/app/:userId/publish-parkingspace", new VueComponent("publish-parkingspace"));
         app.post("/api/app/:userId/publish_parkingspace", parkingSpaceController::createParkingSpace);
-
         app.get("/app/:userId/user-update", new VueComponent("user-update"));
         app.post("/api/:userId/user-update", userController::updateUser);
-
-        //Handler for å hente alle parkeringsplasser
         app.get("/api/parking-spaces", new Handler() {
             @Override
             public void handle(@NotNull Context ctx) throws Exception {
@@ -80,8 +74,6 @@ public class App {
             }
         });
         app.get("/app/:userId/parkingspaces", new VueComponent("parking-spaces-overview"));
-
-        //Handler for å hente en spesifikk parkeringsplass
         app.get("/api/parking-spaces/:spaceId", new Handler() {
             @Override
             public void handle(@NotNull Context ctx) throws Exception {
@@ -95,7 +87,6 @@ public class App {
                 rentalController.createRentalAgreement(ctx);
             }
         });
-
         app.get("/api/:userId/delete", new Handler() {
             @Override
             public void handle(@NotNull Context ctx) throws Exception {

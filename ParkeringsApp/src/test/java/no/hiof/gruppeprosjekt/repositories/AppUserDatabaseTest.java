@@ -3,7 +3,6 @@ package no.hiof.gruppeprosjekt.repositories;
 import no.hiof.gruppeprosjekt.model.User;
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ class AppUserDatabaseTest {
 
     @Test
     public void get_all_correct_users() {
-        //Alle brukere som jeg forventer er Ola og Kari (siden dem alltid er i DB)
+        //Jeg legger inn Ola og Kari og forventer da disse to når jeg henter alle
         ArrayList<User> expectedUsers = new ArrayList<>();
         expectedUsers.add(ola);
         expectedUsers.add(kari);
@@ -48,21 +47,19 @@ class AppUserDatabaseTest {
 
     @Test
     public void get_correct_user_by_mail() {
-        //Sammenligner ID for å sjekke om begge brukere er det samme. Siden ID er noe som er unikt for alle brukere
-        //godkjenner vi at denne sammenligningen er autentisk
+        //Sammenligner ID for å sjekke om begge brukere er det samme. ID'en til brukere determinerer hvem bruker vi jobber med
         Assert.assertEquals(ola.getId(), userDB.getUserByMail("ola_nordmann@gmail.com").getId());
     }
 
     @Test
     public void get_nothing_by_getting_user_with_invalid_mail() {
         //Ingen i databasen har denne eposten
-        Assert.assertNull(userDB.getUserByMail("ola_nordmann@hotmail.com"));
+        Assert.assertNull(userDB.getUserByMail("ola_nordmannnnn@hotmail.com"));
     }
 
     @Test
     public void get_correct_user_by_id() {
         //Kari sin ID = 2
-        //Sammenligningen foregår vet at ID'en til Kari som opprettes sammenlignes med ID'en som vi får fra databasen
         Assert.assertEquals(kari.getId(), userDB.getUserById(2).getId());
     }
 
@@ -106,11 +103,9 @@ class AppUserDatabaseTest {
 
         userDB.registerUser(ahreketil.getId(), ahreketil.getName(), ahreketil.getLastName(), ahreketil.getPassword(), ahreketil.getMail());
 
-        //ID er unike attributter i databasen, dermed brukes dette for sammenligningen av brukere
         Assert.assertEquals(ahreketil.getId(), userDB.getUserById(3).getId());
 
         //Ahre Ketil slettes fra systemet og vil ikke være med videre på testene, slettingen gjøres etter sammenligningen
-        //Testing for sletting gjøres nedenfor
         userDB.deleteUser("3");
     }
 

@@ -1,14 +1,10 @@
 package no.hiof.gruppeprosjekt.repositories;
 
-import jdk.vm.ci.meta.Local;
 import no.hiof.gruppeprosjekt.model.ParkingSpace;
 import no.hiof.gruppeprosjekt.model.User;
-
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
 
 public class RentalDatabase implements IRentalRepository{
     private IUserRepository userRepository;
@@ -65,8 +61,5 @@ public class RentalDatabase implements IRentalRepository{
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
-
-        //Ved bruk av større servere kunne vi ha implementert en "sjekk" som kan sjekke tiden nå med start-tid + duration.
-        //Dersom tiden har oversteget denne tiden ville plassens availability blitt endret til 1 og endret i databasen igjen
     }
 }

@@ -1,10 +1,4 @@
 package no.hiof.gruppeprosjekt.model;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Random;
-
 
 public class User extends Email{
 
@@ -13,7 +7,9 @@ public class User extends Email{
     private String password;
     private int id ;
 
-    public User(){}
+    public User(){
+
+    }
 
     public User(int id, String name,String lastName,String password, String email){
         super(email);

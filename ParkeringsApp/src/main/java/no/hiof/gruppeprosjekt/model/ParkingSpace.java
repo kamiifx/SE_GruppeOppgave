@@ -11,7 +11,9 @@ public class ParkingSpace {
     private User byUser;
     byte available;
 
-    Random rand = new Random();
+    public ParkingSpace() {
+
+    }
 
     public ParkingSpace(int spaceId ,String city, String address, double size_sqm, double price_ph, User byUser) {
         this.spaceId = spaceId;
@@ -21,11 +23,6 @@ public class ParkingSpace {
         this.price_ph = price_ph;
         this.byUser = byUser;
         this.available = 1;
-    }
-
-    //Tom konstruktør for lesing av .json filer
-    public ParkingSpace() {
-
     }
 
     public String getCity() {

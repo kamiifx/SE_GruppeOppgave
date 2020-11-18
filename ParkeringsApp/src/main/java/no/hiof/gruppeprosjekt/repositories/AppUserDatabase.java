@@ -1,5 +1,4 @@
 package no.hiof.gruppeprosjekt.repositories;
-import no.hiof.gruppeprosjekt.App;
 import no.hiof.gruppeprosjekt.model.User;
 
 import java.sql.*;
@@ -169,6 +168,4 @@ public class AppUserDatabase implements IUserRepository {
             System.out.println(e.getMessage());
         }
     }
-
-
 }

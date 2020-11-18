@@ -19,8 +19,9 @@ public class UserController {
         context.json(getAllUser);
         if(getAllUser.isEmpty()) {
             context.status(404);
+        } else {
+            context.status(200);
         }
-        context.status(200);
     }
 
     public void registerUser(Context context){

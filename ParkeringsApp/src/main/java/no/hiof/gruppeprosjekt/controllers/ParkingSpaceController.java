@@ -3,7 +3,6 @@ package no.hiof.gruppeprosjekt.controllers;
 import io.javalin.http.Context;
 import no.hiof.gruppeprosjekt.model.ParkingSpace;
 import no.hiof.gruppeprosjekt.repositories.IParkingSpaceRepository;
-
 import java.util.List;
 import java.util.Random;
 
@@ -17,12 +16,25 @@ public class ParkingSpaceController {
     public void getAllSpaces(Context ctx) {
         List<ParkingSpace> getAllSpace = ParkingSpaceRepository.getAllSpaces();
         ctx.json(getAllSpace);
+        if(getAllSpace.isEmpty()) {
+            ctx.status(404);
+        } else {
+            ctx.status(200);
+        }
     }
 
     public void getSingleSpace(Context ctx) {
         String spaceId = ctx.pathParam("spaceId");
+
+        if(spaceId == null)
+            spaceId = ctx.formParam("spaceId");
+
         ParkingSpace getSpace = ParkingSpaceRepository.getSpaceById(Integer.parseInt(spaceId));
-        ctx.json(getSpace);
+        if(Integer.parseInt(spaceId) == getSpace.getSpaceId()) {
+            ctx.status(200);
+            ctx.json(getSpace);
+        }
+
     }
 
     public void createParkingSpace(Context ctx) {

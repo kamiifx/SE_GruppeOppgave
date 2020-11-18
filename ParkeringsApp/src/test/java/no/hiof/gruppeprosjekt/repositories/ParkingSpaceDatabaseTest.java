@@ -3,8 +3,6 @@ package no.hiof.gruppeprosjekt.repositories;
 import no.hiof.gruppeprosjekt.model.ParkingSpace;
 import no.hiof.gruppeprosjekt.model.User;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,11 +26,28 @@ public class ParkingSpaceDatabaseTest {
         ola = new User(1, "Ola", "Nordmann", "passord123", "ola_nordmann@gmail.com");
         userDB.registerUser(ola.getId(), ola.getName(), ola.getLastName(), ola.getPassword(), ola.getMail());
 
-        rodHerregaard = new ParkingSpace(1,"Halden", "Rød Herregård", 3, 75, ola);
+        rodHerregaard = new ParkingSpace(1,"Halden", "Rod Herregaard", 3, 75, ola);
         haldenIshall = new ParkingSpace(2,"Halden", "Blokkeveien 39", 4, 50, ola);
 
         parkingDB.createParkingSpace(rodHerregaard.getSpaceId(),rodHerregaard.getCity(), rodHerregaard.getAddress(), Double.toString(rodHerregaard.getSize_sqm()), Double.toString(rodHerregaard.getPrice_ph()), Integer.toString(rodHerregaard.getByUser().getId()));
         parkingDB.createParkingSpace(haldenIshall.getSpaceId(),haldenIshall.getCity(), haldenIshall.getAddress(), Double.toString(haldenIshall.getSize_sqm()), Double.toString(haldenIshall.getPrice_ph()), Integer.toString(haldenIshall.getByUser().getId()));
+    }
+
+    @AfterEach
+    public void teardown() {
+        userDB.deleteUser("1");
+
+        String sql = "DELETE FROM parkingspace";
+        String url = "jdbc:sqlite:testappdb.sqlite";
+        try {
+            Connection connect = DriverManager.getConnection(url);
+            PreparedStatement preState = connect.prepareStatement(sql);
+            preState.executeUpdate();
+
+            connect.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
@@ -55,7 +70,7 @@ public class ParkingSpaceDatabaseTest {
 
     @Test
     public void get_null_by_invalid_id() {
-        //Ingen plasser har id 200
+        //Ingen parkeringsplass har id 200
         Assert.assertNull(parkingDB.getSpaceById(200));
     }
 
@@ -100,8 +115,5 @@ public class ParkingSpaceDatabaseTest {
 
         //Plassen er ikke tilgjengelig lenger
         Assert.assertEquals(parkingDB.getSpaceById(2).isAvailable(), 0);
-
-        //Plassen gjøres om til ledig ETTER sammenligningene for å forholde seg til de andre testene
-        parkingDB.updateAvailability(2, (byte) 1);
     }
 }
