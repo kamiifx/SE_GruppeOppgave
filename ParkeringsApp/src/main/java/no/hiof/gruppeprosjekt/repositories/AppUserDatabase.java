@@ -5,8 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class AppUserDatabase implements IUserRepository {
-    private User activeUser;
-    private Boolean loggedin = false;
+
     String url;
 
     public AppUserDatabase(String url) {
@@ -107,12 +106,8 @@ public class AppUserDatabase implements IUserRepository {
     public boolean loginUser(String email, String password) {
         User user = getUserByMail(email);
         if (user.getMail().equals(email) && user.getPassword().equals(password)){
-            activeUser = user;
-            loggedin = true;
             return true;
         }
-        activeUser = null;
-        loggedin = false;
         return false;
     }
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="no.hiof.gruppeprosjekt.controllers.RentalControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-11-19T12:17:48" hostname="DESKTOP-340MNFF" time="0.19">
+  <properties/>
+  <testcase name="create_a_rental_agreement_success()" classname="no.hiof.gruppeprosjekt.controllers.RentalControllerTest" time="0.119"/>
+  <testcase name="create_a_rental_agreement_fails_because_no_duration()" classname="no.hiof.gruppeprosjekt.controllers.RentalControllerTest" time="0.069"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

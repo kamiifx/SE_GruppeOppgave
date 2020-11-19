@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="no.hiof.gruppeprosjekt.controllers.ParkingSpaceControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2020-11-19T12:17:47" hostname="DESKTOP-340MNFF" time="1.061">
+  <properties/>
+  <testcase name="create_parkingSpace_success()" classname="no.hiof.gruppeprosjekt.controllers.ParkingSpaceControllerTest" time="0.663"/>
+  <testcase name="get_all_spaces_success()" classname="no.hiof.gruppeprosjekt.controllers.ParkingSpaceControllerTest" time="0.076"/>
+  <testcase name="get_single_space_fail()" classname="no.hiof.gruppeprosjekt.controllers.ParkingSpaceControllerTest" time="0.102"/>
+  <testcase name="get_single_space_success()" classname="no.hiof.gruppeprosjekt.controllers.ParkingSpaceControllerTest" time="0.075"/>
+  <testcase name="create_parkingSpace_fail_because_of_missing_field()" classname="no.hiof.gruppeprosjekt.controllers.ParkingSpaceControllerTest" time="0.066"/>
+  <testcase name="get_all_spaces_fail()" classname="no.hiof.gruppeprosjekt.controllers.ParkingSpaceControllerTest" time="0.061"/>
+  <system-out><![CDATA[ResultSet closed
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

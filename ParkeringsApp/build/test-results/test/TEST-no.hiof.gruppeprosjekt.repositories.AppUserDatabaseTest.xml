@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2020-11-19T12:17:49" hostname="DESKTOP-340MNFF" time="0.561">
+  <properties/>
+  <testcase name="get_correct_user_by_mail()" classname="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" time="0.05"/>
+  <testcase name="user_is_updated()" classname="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" time="0.085"/>
+  <testcase name="user_logged_in_with_invalid_password()" classname="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" time="0.046"/>
+  <testcase name="delete_correct_user()" classname="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" time="0.053"/>
+  <testcase name="get_all_correct_users()" classname="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" time="0.047"/>
+  <testcase name="user_is_registered_and_added_to_db()" classname="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" time="0.07"/>
+  <testcase name="get_nothing_by_getting_user_with_invalid_mail()" classname="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" time="0.045"/>
+  <testcase name="get_nothing_by_getting_user_with_invalid_id()" classname="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" time="0.046"/>
+  <testcase name="get_correct_user_by_id()" classname="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" time="0.045"/>
+  <testcase name="user_logged_in_with_correct_credentials()" classname="no.hiof.gruppeprosjekt.repositories.AppUserDatabaseTest" time="0.045"/>
+  <system-out><![CDATA[ResultSet closed
+ResultSet closed
+ResultSet closed
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

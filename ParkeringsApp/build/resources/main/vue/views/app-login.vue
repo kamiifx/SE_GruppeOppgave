@@ -3,12 +3,12 @@
         <header>
             <img src="https://www.flaticon.com/svg/static/icons/svg/1159/1159499.svg" alt="logo">
             <h3>Parkering<br> App</h3>
+            <div class="btn-group">
+                <button>Admin Login</button>
+                <button v-on:click="modalActive = true">Login</button>
+            </div>
         </header>
-      <br> <br>
-      <div class="btn-group">
-        <button >Admin Login</button>
-        <button v-on:click="modalActive = true">Login</button>
-      </div>
+        <br> <br>
 
         <div class="modalFormWrap" v-bind:style='{display:(modalActive?"block":"none")}'>
             <div v-bind:style='{height:(register?"500px":"320px")}' class="modalForm">
@@ -35,6 +35,34 @@
         </div>
 
         <main>
+            <div class="parkingSpaces">
+                <ul class="parkinSpacesList">
+                    <li v-for="space in spaces">
+
+                        <div class="singleSpace">
+                            <h2>Parking Space {{space.spaceId}}</h2>
+                            <div class="infoSpace">
+                                <div class="address">
+                                    <h5>By: {{space.city}}</h5>
+                                    <h5 class="adressName">{{space.address}}</h5>
+                                </div>
+                                <div class="spaceInfo">
+                                    <h5>Størrelse: {{space.size_sqm}}</h5>
+                                    <h5 class="spaceSq">Pris: {{space.price_ph}}</h5>
+                                </div>
+                            </div>
+                            <div class="userInfo">
+                                <div class="userNames">
+                                    <p class="madeBy">Laget av:</p>
+                                    <p class="name">{{space.byUser.name}}</p>
+                                    <p>{{space.byUser.lastName}}</p>
+                                </div>
+                                <p>{{space.byUser.mail}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
         </main>
 
@@ -50,19 +78,92 @@
         data:() =>({
             modalActive:false,
             register:false,
-            users:[]
+            users:[],
+            spaces:[]
         }),
         created() {
-            fetch("/api/users")
+            fetch("/api/users" && "/api/parking-spaces")
                 .then(res => res.json())
                 .then(res => {
                     this.users = res;
+                    this.spaces = res;
                 }).catch(() => alert("Error getting user"));
         }
     });
 </script>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+    .parkingSpaces{
+        display: flex;
+        flex-direction: row;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        color: #1A202C;
+        height: auto;
+        width: 350px;
+        border-radius: 10px;
+        background-color: #EDF2F7;
+        -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
+        box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.25);
+    }
+    .parkingSpaces h2{
+        margin-bottom: 15px;
+        margin-right: 30px;
+    }
+    .address{
+        border: 1px solid black;
+        height: 60px;
+        width: 110px;
+        border-radius: 10px;
+        align-content: center;
+        margin-right: 6px;
+    }
+    .address h5{
+        margin-top: 9px;
+        margin-left: 15px;
+        margin-bottom: 8px;
+    }
+    .adressName{
+        margin-top: -10px;
+    }
+
+    .spaceInfo{
+        border: 1px solid black;
+        height: 60px;
+        width: 110px;
+        border-radius: 10px;
+        align-content: center;
+    }
+    .spaceInfo h5{
+        margin-top: 9px;
+        margin-left: 15px;
+        margin-bottom: 8px;
+    }
+    .spaceSq{
+        margin-top: -10px;
+    }
+    .infoSpace{
+        display: flex;
+        flex-direction: row;
+    }
+    .userNames{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: -15px;
+    }
+    .madeBy{
+        margin-right: 5px;
+    }
+    .name{
+        margin-right: 5px;
+    }
+    .singleSpace{
+        margin-right: 20px;
+    }
+
+
     header img{
         width: 40px;
         margin: 30px;
@@ -195,31 +296,34 @@
         cursor: pointer;
     }
 
+    .btn-group{
+        margin-left: 82%;
+    }
     .btn-group button {
-      background-color: #4CAF50; /* Green background */
-      border: 1px solid green; /* Green border */
-      color: white; /* White text */
-      padding: 10px 24px; /* Some padding */
-      cursor: pointer; /* Pointer/hand icon */
-      float: left; /* Float the buttons side by side */
+        background-color: #68D391; /* Green background */
 
-      margin:10px;
+        color: white; /* White text */
+        padding: 10px 24px; /* Some padding */
+        cursor: pointer; /* Pointer/hand icon */
+        float: left; /* Float the buttons side by side */
+        margin:10px;
+        height: 45px;
     }
 
     .btn-group button:not(:last-child) {
-      border-right: none; /* Prevent double borders */
+        border-right: none; /* Prevent double borders */
     }
 
     /* Clear floats (clearfix hack) */
     .btn-group:after {
-      content: "";
-      clear: both;
-      display: table;
+        content: "";
+        clear: both;
+        display: table;
     }
 
     /* Add a background color on hover */
     .btn-group button:hover {
-      background-color: #3e8e41;
+        background-color: #3e8e41;
     }
 
 </style>

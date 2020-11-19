@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="no.hiof.gruppeprosjekt.controllers.UserControllerTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2020-11-19T12:17:49" hostname="DESKTOP-340MNFF" time="0.381">
+  <properties/>
+  <testcase name="user_is_not_registered_because_a_field_is_missing()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.032"/>
+  <testcase name="delete_user()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.029"/>
+  <testcase name="user_login_invalid_password()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.031"/>
+  <testcase name="get_all_users_fail()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.032"/>
+  <testcase name="get_all_users_success()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.031"/>
+  <testcase name="update_user()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.036"/>
+  <testcase name="user_is_registered()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.055"/>
+  <testcase name="user_login_invalid_email_causing_nullpointerexception()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.032"/>
+  <testcase name="get_single_user_correct()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.03"/>
+  <testcase name="get_single_user_fail()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.032"/>
+  <testcase name="user_login_correct_credentials()" classname="no.hiof.gruppeprosjekt.controllers.UserControllerTest" time="0.03"/>
+  <system-out><![CDATA[ResultSet closed
+ResultSet closed
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

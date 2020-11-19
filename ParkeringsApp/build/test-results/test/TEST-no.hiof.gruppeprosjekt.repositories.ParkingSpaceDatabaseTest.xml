@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="no.hiof.gruppeprosjekt.repositories.ParkingSpaceDatabaseTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2020-11-19T12:17:50" hostname="DESKTOP-340MNFF" time="0.385">
+  <properties/>
+  <testcase name="get_space_by_correct_id()" classname="no.hiof.gruppeprosjekt.repositories.ParkingSpaceDatabaseTest" time="0.065"/>
+  <testcase name="space_is_updated_also_rented_and_is_not_available_now()" classname="no.hiof.gruppeprosjekt.repositories.ParkingSpaceDatabaseTest" time="0.089"/>
+  <testcase name="space_is_registered_and_added_to_db()" classname="no.hiof.gruppeprosjekt.repositories.ParkingSpaceDatabaseTest" time="0.085"/>
+  <testcase name="get_all_correct_parkingspaces()" classname="no.hiof.gruppeprosjekt.repositories.ParkingSpaceDatabaseTest" time="0.062"/>
+  <testcase name="get_null_by_invalid_id()" classname="no.hiof.gruppeprosjekt.repositories.ParkingSpaceDatabaseTest" time="0.061"/>
+  <system-out><![CDATA[ResultSet closed
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

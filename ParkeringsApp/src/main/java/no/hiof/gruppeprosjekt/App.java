@@ -38,31 +38,11 @@ public class App {
         app.config.enableWebjars();
 
         app.get("/", new VueComponent("<app-login><app-login>"));
-        app.get("/api/users", new Handler() {
-            @Override
-            public void handle(@NotNull Context ctx) throws Exception {
-                userController.getAllUsers(ctx);
-            }
-        });
-        app.post("/api/login", new Handler() {
-            @Override
-            public void handle(@NotNull Context ctx) throws Exception {
-                userController.loginUser(ctx);
-            }
-        });
-        app.post("/api/register", new Handler() {
-            @Override
-            public void handle(@NotNull Context ctx) throws Exception {
-                userController.registerUser(ctx);
-            }
-        });
+        app.get("/api/users", userController::getAllUsers);
+        app.post("/api/login", userController::loginUser);
+        app.post("/api/register", userController::registerUser);
         app.get("/app/:userId",new VueComponent("app"));
-        app.get("/api/users/:userId", new Handler() {
-            @Override
-            public void handle(@NotNull Context ctx) throws Exception {
-                userController.getSingleUser(ctx);
-            }
-        });
+        app.get("/api/users/:userId", userController::getSingleUser);
         app.get("/app/:userId/publish-parkingspace", new VueComponent("publish-parkingspace"));
         app.post("/api/app/:userId/publish_parkingspace", parkingSpaceController::createParkingSpace);
         app.get("/app/:userId/user-update", new VueComponent("user-update"));
