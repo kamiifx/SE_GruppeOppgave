@@ -10,10 +10,10 @@
         </header>
         <aside>
             <div class="brukerInfo">
-                <p>Bruker info:</p>
-                <p>{{users.name}} {{users.lastName}}</p>
-                <p>{{users.mail}}</p>
+                <p class="userName">{{users.name}} {{users.lastName}}</p>
+                <p class="userEmail"><i>{{users.mail}}</i></p>
             </div>
+
           <div id = userOperations>
             <a id="publishSpaceButton" :href=`${users.id}/publish-parkingspace`>Legg ut parkeringsplass</a>
             <a id="rentSpaceButton" :href=`${users.id}/parkingspaces`>Lei en parkeringsplass</a>
@@ -49,6 +49,32 @@
 </script>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+    .brukerInfo{
+        font-family: 'Roboto', sans-serif;
+        width: 230px;
+        height: 130px;
+        background-color: #EDF2F7;
+        border-radius: 10px;
+        -webkit-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.30);
+        -moz-box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.30);
+        box-shadow: 0px 0px 12px 0px rgba(0,0,0,0.30);
+    }
+
+    .brukerInfo p{
+        margin-left: 12%;
+    }
+    .userName{
+        font-size: 26px;
+
+        padding-top: 17px;
+        font-weight: 400;
+    }
+    .userEmail{
+        font-size: 18px;
+        font-weight: 600;
+        color: #68D391;
+    }
+
     header img{
         width: 40px;
         margin: 30px;
@@ -100,7 +126,6 @@
     #publishSpaceButton {
       font-family: 'Roboto', sans-serif;
       padding: 12px 30px;
-      background-color: #4CAF50;
       color: white;
       text-decoration: none;
       border: none;
@@ -108,6 +133,8 @@
       display: inline-block;
       font-size: 16px;
       transition-duration: 0.3s;
+        background-color: #68D391;
+        border-radius: 7px;
     }
 
     #publishSpaceButton:hover {
@@ -118,7 +145,6 @@
     #rentSpaceButton {
       font-family: 'Roboto', sans-serif;
       padding: 12px 30px;
-      background-color: #4CAF50;
       color: white;
       text-decoration: none;
       border: none;
@@ -126,6 +152,8 @@
       display: inline-block;
       font-size: 16px;
       transition-duration: 0.3s;
+        background-color: #68D391;
+        border-radius: 7px;
     }
 
     #rentSpaceButton:hover {
@@ -136,7 +164,6 @@
     #deleteUserButton {
       font-family: 'Roboto', sans-serif;
       padding: 12px 30px;
-      background-color: #4CAF50;
       color: white;
       text-decoration: none;
       border: none;
@@ -144,6 +171,8 @@
       display: inline-block;
       font-size: 16px;
       transition-duration: 0.3s;
+        background-color: #68D391;
+        border-radius: 7px;
     }
 
     #deleteUserButton:hover {
@@ -154,7 +183,6 @@
     #updateUserButton {
       font-family: 'Roboto', sans-serif;
       padding: 12px 30px;
-      background-color: #4CAF50;
       color: white;
       text-decoration: none;
       border: none;
@@ -162,6 +190,8 @@
       display: inline-block;
       font-size: 16px;
       transition-duration: 0.3s;
+        background-color: #68D391;
+        border-radius: 7px;
     }
 
     #updateUserButton:hover {
@@ -176,7 +206,7 @@
 
     #userOperations {
       position: relative;
-      top: 120px;
+      top: 160px;
     }
 
 </style>
