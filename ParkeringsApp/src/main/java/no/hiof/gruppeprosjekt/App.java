@@ -43,6 +43,8 @@ public class App {
         app.post("/api/register", userController::registerUser);
         app.get("/app/:userId",new VueComponent("app"));
         app.get("/api/users/:userId", userController::getSingleUser);
+        app.get("/api/:userId/delete", userController::deleteUser);
+
         app.get("/app/:userId/publish-parkingspace", new VueComponent("publish-parkingspace"));
         app.post("/api/app/:userId/publish_parkingspace", parkingSpaceController::createParkingSpace);
         app.get("/app/:userId/user-update", new VueComponent("user-update"));
@@ -50,9 +52,9 @@ public class App {
         app.get("/api/parking-spaces", parkingSpaceController::getAllSpaces);
         app.get("/app/:userId/parkingspaces", new VueComponent("parking-spaces-overview"));
         app.get("/api/parking-spaces/:spaceId", parkingSpaceController::getSingleSpace);
+
         app.get("/app/:userId/parkingspaces/:spaceId", new VueComponent("parking-space-detail"));
         app.post("/api/app/:userId/parkingspaces/:spaceId/rentspace", rentalController::createRentalAgreement);
-        app.get("/api/:userId/delete", userController::deleteUser);
     }
 
     public static void connectDB(String url) {
