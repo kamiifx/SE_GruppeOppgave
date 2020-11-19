@@ -14,6 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ParkingSpaceDatabaseTest {
+
+    //TESTER KLASSEN ParkingSpaceDatabase
+
     AppUserDatabase userDB = new AppUserDatabase("jdbc:sqlite:testappdb.sqlite");
     ParkingSpaceDatabase parkingDB = new ParkingSpaceDatabase(userDB, "jdbc:sqlite:testappdb.sqlite");
 
@@ -74,6 +77,9 @@ public class ParkingSpaceDatabaseTest {
         Assert.assertNull(parkingDB.getSpaceById(200));
     }
 
+    ////////////////////////////////////
+    //Tester kravet: User.PublishSpace//
+    ////////////////////////////////////
     @Test
     public void space_is_registered_and_added_to_db() {
         ParkingSpace bakgaarden = new ParkingSpace();
@@ -100,6 +106,7 @@ public class ParkingSpaceDatabaseTest {
         }
     }
 
+    //Tester bare at plassen ikke er tilgjengelig etter leie
     @Test
     public void space_is_updated_also_rented_and_is_not_available_now() {
         //Vi ser for oss at en ny bruker leier parkeringsplassen "Halden Ishall". Denne skal da ikke være available, altså false på available

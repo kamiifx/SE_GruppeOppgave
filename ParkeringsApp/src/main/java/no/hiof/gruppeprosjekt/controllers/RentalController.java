@@ -13,6 +13,7 @@ public class RentalController {
         this.rentalRepository = rentalRepository;
     }
 
+    //KRAV: User.RentParking
     public void createRentalAgreement(Context ctx) {
         Random rand = new Random();
         int rentalId = rand.nextInt(1000);

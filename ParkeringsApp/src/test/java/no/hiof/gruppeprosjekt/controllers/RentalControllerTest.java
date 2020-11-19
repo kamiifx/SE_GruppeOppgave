@@ -59,6 +59,9 @@ public class RentalControllerTest {
         }
     }
 
+    ///////////////////////////////////
+    //Tester kravet: User.RentParking//
+    ///////////////////////////////////
     @Test
     public void create_a_rental_agreement_success() {
         when(ctx.formParam("userId")).thenReturn("300");
@@ -68,6 +71,9 @@ public class RentalControllerTest {
         verify(ctx).status(201);  //CREATED
     }
 
+    ///////////////////////////////////
+    //Tester kravet: User.RentParking//
+    ///////////////////////////////////
     @Test
     public void create_a_rental_agreement_fails_because_no_duration() {
         when(ctx.formParam("userId")).thenReturn("300");

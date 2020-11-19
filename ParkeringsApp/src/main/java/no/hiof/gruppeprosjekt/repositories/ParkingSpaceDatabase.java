@@ -89,6 +89,7 @@ public class ParkingSpaceDatabase implements IParkingSpaceRepository {
         return null;
     }
 
+    //KRAV: User.PublishSpace
     @Override
     public void createParkingSpace(int spaceId, String city, String address, String size_sqm, String price_ph, String userId) {
         User byUser = userRepository.getUserById(Integer.parseInt(userId));

@@ -111,6 +111,7 @@ public class AppUserDatabase implements IUserRepository {
         return false;
     }
 
+    //KRAV: Register.AsUser
     @Override
     public void registerUser(int id, String name, String lastName, String password, String email) {
         String sql = "INSERT INTO users VALUES(?,?,?,?,?)";
@@ -129,6 +130,7 @@ public class AppUserDatabase implements IUserRepository {
         }
     }
 
+    //KRAV: Delete.User
     @Override
     public void deleteUser(String userId) {
         String sql = "DELETE FROM users WHERE id = ?";
@@ -145,6 +147,7 @@ public class AppUserDatabase implements IUserRepository {
         }
     }
 
+    //KRAV: User.ChangeInformation
     @Override
     public void updateUser(String id, String name, String lastName, String password, String email) {
         String sql = "UPDATE users SET name = ?, lastname = ?, password = ?, email = ? WHERE id = ?";

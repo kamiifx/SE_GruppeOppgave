@@ -30,6 +30,9 @@ class UserControllerTest {
         userDBrepo.deleteUser("500");
     }
 
+    //////////////////////////////////
+    //Tester kravet: Register.AsUser//
+    //////////////////////////////////
     @Test
     public void user_is_registered() {
         when(ctx.formParam("name")).thenReturn("test");
@@ -44,6 +47,9 @@ class UserControllerTest {
         userDBrepo.deleteUser(Integer.toString(user.getId()));
     }
 
+    //////////////////////////////////
+    //Tester kravet: Register.AsUser//
+    //////////////////////////////////
     @Test
     public void user_is_not_registered_because_a_field_is_missing() {
         //Bytt gjerne andre returnverdier til en tom string
@@ -107,6 +113,9 @@ class UserControllerTest {
 
     }
 
+    /////////////////////////////////////////
+    //Tester kravet: User.ChangeInformation//
+    /////////////////////////////////////////
     @Test
     public void update_user() {
         when(ctx.formParam("userId")).thenReturn("5");
@@ -124,6 +133,9 @@ class UserControllerTest {
         userDBrepo.registerUser(20, "Kent", "Rogersen", "kentisbentis123", "kent_rogersen@gmail.com");
     }
 
+    //////////////////////////////
+    //Tester kravet: Delete.User//
+    //////////////////////////////
     @Test
     public void delete_user() {
         when(ctx.formParam("userId")).thenReturn("20");

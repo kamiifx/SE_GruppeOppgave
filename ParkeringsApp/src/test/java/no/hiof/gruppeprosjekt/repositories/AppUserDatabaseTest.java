@@ -7,7 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
-class   AppUserDatabaseTest {
+class AppUserDatabaseTest {
+
+    //TESTER KLASSEN AppUserDatabase
 
     AppUserDatabase userDB = new AppUserDatabase("jdbc:sqlite:testappdb.sqlite");
     User ola;
@@ -92,6 +94,9 @@ class   AppUserDatabaseTest {
         //eposten ikke samsvarer med noen sine i systemet, dermed vil ingen logges inn ved å skrive inn feil epost
     }
 
+    //////////////////////////////////
+    //Tester kravet: Register.AsUser//
+    //////////////////////////////////
     @Test
     public void user_is_registered_and_added_to_db() {
         User ahreketil = new User();
@@ -109,6 +114,9 @@ class   AppUserDatabaseTest {
         userDB.deleteUser("3");
     }
 
+    //////////////////////////////
+    //Tester kravet: Delete.user//
+    //////////////////////////////
     @Test
     public void delete_correct_user() {
         //Det er 2 brukere i databasen nå "Ola" og "Kari"
@@ -126,6 +134,9 @@ class   AppUserDatabaseTest {
         Assert.assertNull(userDB.getUserById(2));
     }
 
+    /////////////////////////////////////////
+    //Tester kravet: User.ChangeInformation//
+    /////////////////////////////////////////
     @Test
     public void user_is_updated() {
         User halvorsen = new User(22, "Ola", "Halvorsen", "halvorsen..", "halvorsen@live.no");

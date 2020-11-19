@@ -51,6 +51,9 @@ class RentalDatabaseTest {
         }
     }
 
+    ///////////////////////////////////
+    //Tester kravet: User.RentParking//
+    ///////////////////////////////////
     @Test
     void createRentalAgreement_success() throws SQLException {
         //Situasjon-beskrivelse: Kari ønsker å leie en parkeringsplass ved ishallen for en hockey-kamp.

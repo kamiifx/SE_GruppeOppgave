@@ -24,6 +24,7 @@ public class UserController {
         }
     }
 
+    //KRAV: Register.AsUser
     public void registerUser(Context context){
         Random rand = new Random();
         String name = context.formParam("name");
@@ -70,6 +71,7 @@ public class UserController {
         }
     }
 
+    //KRAV: User.ChangeInformation
     public void updateUser(Context context) {
         String id = context.pathParam("userId");
 
@@ -85,6 +87,7 @@ public class UserController {
         context.redirect("/app/" + id);
     }
 
+    //KRAV: Delete.user
     public void deleteUser(Context context) {
         String user = context.pathParam("userId");
 

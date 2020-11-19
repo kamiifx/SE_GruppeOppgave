@@ -56,7 +56,7 @@ class ParkingSpaceControllerTest {
         verify(ctx).status(200);  //OK
     }
 
-    @Test //FEIL HER
+    @Test
     public void get_all_spaces_fail() {
         //Sørger for at det ikke er noen plasser
         String sql = "DELETE FROM parkingspace ";
@@ -92,6 +92,9 @@ class ParkingSpaceControllerTest {
         });
     }
 
+    ////////////////////////////////////
+    //Tester kravet: User.PublishSpace//
+    ////////////////////////////////////
     @Test
     public void create_parkingSpace_success(){
         when(ctx.formParam("userId")).thenReturn("200");
@@ -104,6 +107,9 @@ class ParkingSpaceControllerTest {
         verify(ctx).status(201);  //CREATED
     }
 
+    ////////////////////////////////////
+    //Tester kravet: User.PublishSpace//
+    ////////////////////////////////////
     @Test
     public void create_parkingSpace_fail_because_of_missing_field() {
         when(ctx.formParam("userId")).thenReturn("200");

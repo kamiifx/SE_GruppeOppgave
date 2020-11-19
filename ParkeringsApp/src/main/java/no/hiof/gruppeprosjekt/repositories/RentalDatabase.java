@@ -36,6 +36,7 @@ public class RentalDatabase implements IRentalRepository{
         }
     }
 
+    //KRAV: User.RentParking
     @Override
     public void createRentalAgreement(int rentalId,int userId, int spaceId, int duration) {
         User user = userRepository.getUserById(userId);

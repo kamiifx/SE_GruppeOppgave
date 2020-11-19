@@ -37,6 +37,7 @@ public class ParkingSpaceController {
 
     }
 
+    //KRAV: User.PublishSpace
     public void createParkingSpace(Context ctx) {
         String user = ctx.pathParam("userId");
 
