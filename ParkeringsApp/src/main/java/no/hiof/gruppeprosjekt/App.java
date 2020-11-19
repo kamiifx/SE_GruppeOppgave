@@ -47,32 +47,12 @@ public class App {
         app.post("/api/app/:userId/publish_parkingspace", parkingSpaceController::createParkingSpace);
         app.get("/app/:userId/user-update", new VueComponent("user-update"));
         app.post("/api/:userId/user-update", userController::updateUser);
-        app.get("/api/parking-spaces", new Handler() {
-            @Override
-            public void handle(@NotNull Context ctx) throws Exception {
-                parkingSpaceController.getAllSpaces(ctx);
-            }
-        });
+        app.get("/api/parking-spaces", parkingSpaceController::getAllSpaces);
         app.get("/app/:userId/parkingspaces", new VueComponent("parking-spaces-overview"));
-        app.get("/api/parking-spaces/:spaceId", new Handler() {
-            @Override
-            public void handle(@NotNull Context ctx) throws Exception {
-                parkingSpaceController.getSingleSpace(ctx);
-            }
-        });
+        app.get("/api/parking-spaces/:spaceId", parkingSpaceController::getSingleSpace);
         app.get("/app/:userId/parkingspaces/:spaceId", new VueComponent("parking-space-detail"));
-        app.post("/api/app/:userId/parkingspaces/:spaceId/rentspace", new Handler() {
-            @Override
-            public void handle(@NotNull Context ctx) throws Exception {
-                rentalController.createRentalAgreement(ctx);
-            }
-        });
-        app.get("/api/:userId/delete", new Handler() {
-            @Override
-            public void handle(@NotNull Context ctx) throws Exception {
-                userController.deleteUser(ctx);
-            }
-        });
+        app.post("/api/app/:userId/parkingspaces/:spaceId/rentspace", rentalController::createRentalAgreement);
+        app.get("/api/:userId/delete", userController::deleteUser);
     }
 
     public static void connectDB(String url) {
