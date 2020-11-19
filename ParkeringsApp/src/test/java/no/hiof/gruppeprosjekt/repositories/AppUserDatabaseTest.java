@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
-class AppUserDatabaseTest {
+class   AppUserDatabaseTest {
 
     AppUserDatabase userDB = new AppUserDatabase("jdbc:sqlite:testappdb.sqlite");
     User ola;
@@ -122,10 +122,8 @@ class AppUserDatabaseTest {
         //Forventer nå at det bare er 1 bruker siden vi fjernet en av to brukere
         Assert.assertEquals(1, userDB.getAllUsers().size());
 
-        //Gjenstående brukere hentes
-        ArrayList<User> leftUsers = new ArrayList<>(userDB.getAllUsers());
-        //Kari er ikke en av de som gjenstår
-        Assert.assertFalse(leftUsers.contains(kari));
+        //Kari er ikke lenger i systemet, da får vi null når vi prøver å hente henne
+        Assert.assertNull(userDB.getUserById(2));
     }
 
     @Test
