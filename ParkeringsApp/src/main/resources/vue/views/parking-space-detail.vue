@@ -11,7 +11,7 @@
       <form class="create" @submit="checkForm" :action=`/api/app/${user.id}/parkingspaces/${parkingSpace.spaceId}/rentspace` method="post">
         <p>
           <label for="duration">Hvor mange timer vil du leie denne plassen?<label>
-            <input type="number" name="duration" id="duration" v-model="duration">
+            <input type="number" name="duration" id="duration" min="1" v-model="duration">
         </p>
 
         <p>
