@@ -4,11 +4,11 @@
       <img src="https://www.flaticon.com/svg/static/icons/svg/1159/1159499.svg" alt="logo">
       <h3>User update<br> App</h3>
       <div class="logins">
-        <button class="button-user-login">Logout</button>
+        <button class="button-user-login">Logg ut</button>
       </div>
     </div>
     <div class="form-style">
-      <h2>Update user, {{user.name}}</h2>
+      <h2>Oppdater brukerinformasjon, {{user.name}}</h2>
       <form class="create" @submit="checkForm" :action=`/api/${user.id}/user-update` method="post">
         <p>
           <label for="userId">User Id<label>
@@ -16,26 +16,26 @@
         </p>
 
         <p>
-          <label for="email">Email<label>
+          <label for="email">Epost<label>
             <input type="text" name="email" id="email" v-model="email">
         </p>
 
         <p>
-          <label for="first_name">First Name<label>
+          <label for="first_name">Fornavn<label>
             <input type="text" name="first_name" id="first_name" v-model="first_name">
         </p>
 
         <p>
-        <label for="last_name">Last Name<label>
+        <label for="last_name">Etternavn<label>
           <input type="text" name="last_name" id="last_name" v-model="last_name">
         </p>
 
         <p>
-          <label for="password">Password<label>
+          <label for="password">Passord<label>
             <input type="password" name="password" id="password" v-model="password">
         </p>
         <p>
-          <input type="submit" value="Update user">
+          <input type="submit" value="Oppdater bruker">
         </p>
 
       </form>
