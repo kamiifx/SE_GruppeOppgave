@@ -1,7 +1,5 @@
 package no.hiof.gruppeprosjekt;
 import io.javalin.Javalin;
-import io.javalin.http.Context;
-import io.javalin.http.Handler;
 import io.javalin.plugin.rendering.vue.VueComponent;
 import no.hiof.gruppeprosjekt.controllers.ParkingSpaceController;
 import no.hiof.gruppeprosjekt.controllers.RentalController;
@@ -9,16 +7,14 @@ import no.hiof.gruppeprosjekt.controllers.UserController;
 import no.hiof.gruppeprosjekt.repositories.AppUserDatabase;
 import no.hiof.gruppeprosjekt.repositories.ParkingSpaceDatabase;
 import no.hiof.gruppeprosjekt.repositories.RentalDatabase;
-import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 
 public class App {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         //Repo + controller for brukere
         AppUserDatabase userDBRepo = new AppUserDatabase("jdbc:sqlite:appdb.sqlite");
         UserController userController = new UserController(userDBRepo);
@@ -36,6 +32,10 @@ public class App {
 
         Javalin app = Javalin.create().start(7000);
         app.config.enableWebjars();
+
+        /*
+         * Her kunne vi ha implementert eksterne tjenesten Auth0 for innlogging
+         * */
 
         app.get("/", new VueComponent("<app-login><app-login>"));
         app.get("/api/users", userController::getAllUsers);

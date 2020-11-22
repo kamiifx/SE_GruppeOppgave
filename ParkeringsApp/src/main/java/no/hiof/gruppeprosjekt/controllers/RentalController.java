@@ -13,6 +13,10 @@ public class RentalController {
         this.rentalRepository = rentalRepository;
     }
 
+    /*
+    * Her hadde vi implementert Stripe som betalingsløsning for leieavtaler
+    * */
+
     //KRAV: User.RentParking
     public void createRentalAgreement(Context ctx) {
         Random rand = new Random();

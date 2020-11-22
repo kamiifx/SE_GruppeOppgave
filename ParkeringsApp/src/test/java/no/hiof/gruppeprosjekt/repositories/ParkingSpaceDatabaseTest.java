@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ParkingSpaceDatabaseTest {
-
     //TESTER KLASSEN ParkingSpaceDatabase
 
     AppUserDatabase userDB = new AppUserDatabase("jdbc:sqlite:testappdb.sqlite");

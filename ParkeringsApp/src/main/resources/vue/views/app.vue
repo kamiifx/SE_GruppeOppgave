@@ -4,7 +4,7 @@
             <img src="https://www.flaticon.com/svg/static/icons/svg/1159/1159499.svg" alt="logo">
             <h3>Parkering<br> App</h3>
             <div class="logins">
-                <button class="button-user-login">Logout</button>
+                <button class="button-user-login">Logg ut</button>
                 <button class="button- "></button>
             </div>
         </header>

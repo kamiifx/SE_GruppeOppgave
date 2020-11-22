@@ -102,6 +102,7 @@ public class AppUserDatabase implements IUserRepository {
         return null;
     }
 
+    //KRAV: User.LogIn (Kjapp løsning)
     @Override
     public boolean loginUser(String email, String password) {
         User user = getUserByMail(email);
@@ -111,7 +112,7 @@ public class AppUserDatabase implements IUserRepository {
         return false;
     }
 
-    //KRAV: Register.AsUser
+    //KRAV: Register.User
     @Override
     public void registerUser(int id, String name, String lastName, String password, String email) {
         String sql = "INSERT INTO users VALUES(?,?,?,?,?)";
@@ -147,7 +148,7 @@ public class AppUserDatabase implements IUserRepository {
         }
     }
 
-    //KRAV: User.ChangeInformation
+    //KRAV: Update.User
     @Override
     public void updateUser(String id, String name, String lastName, String password, String email) {
         String sql = "UPDATE users SET name = ?, lastname = ?, password = ?, email = ? WHERE id = ?";

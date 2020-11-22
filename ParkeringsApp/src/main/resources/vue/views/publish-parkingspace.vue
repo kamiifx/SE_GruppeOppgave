@@ -29,12 +29,12 @@
 
       <p>
         <label for="size_sqm">Størrelse (m<sup>2</sup>)<label>
-          <input type="number" name="size_sqm" id="size_sqm" v-model="size_sqm">
+          <input type="number" name="size_sqm" id="size_sqm" min="1" v-model="size_sqm">
       </p>
 
       <p>
         <label for="price_ph">Pris per time<label>
-          <input type="number" name="price_ph" id="price_ph" v-model="price_ph">
+          <input type="number" name="price_ph" id="price_ph" min="0" v-model="price_ph">
       </p>
 
       <p>

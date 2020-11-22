@@ -24,7 +24,7 @@ public class UserController {
         }
     }
 
-    //KRAV: Register.AsUser
+    //KRAV: Register.User
     public void registerUser(Context context){
         Random rand = new Random();
         String name = context.formParam("name");
@@ -43,6 +43,7 @@ public class UserController {
         }
     }
 
+    //KRAV: User.Login (Kjapp løsning)
     public void loginUser(Context context){
         String email = context.formParam("email");
         String password = context.formParam("password");
@@ -71,7 +72,7 @@ public class UserController {
         }
     }
 
-    //KRAV: User.ChangeInformation
+    //KRAV: Update.User
     public void updateUser(Context context) {
         String id = context.pathParam("userId");
 
@@ -87,7 +88,7 @@ public class UserController {
         context.redirect("/app/" + id);
     }
 
-    //KRAV: Delete.user
+    //KRAV: Delete.User
     public void deleteUser(Context context) {
         String user = context.pathParam("userId");
 

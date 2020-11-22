@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import static org.mockito.Mockito.*;
 
 class ParkingSpaceControllerTest {
+    //Tester klassen ParkingSpaceController
+
     private AppUserDatabase userDBrepo;
     private ParkingSpaceDatabase parkingDBrepo;
     private ParkingSpaceController parkingController;

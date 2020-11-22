@@ -13,6 +13,11 @@ public class ParkingSpaceController {
         this.ParkingSpaceRepository = parkingSpaceRepository;
     }
 
+    /*
+    * Her hadde vi implementert google maps API for å hente et kart
+    * og legge tilgjengelige plassene på det kartet
+    * */
+
     public void getAllSpaces(Context ctx) {
         List<ParkingSpace> getAllSpace = ParkingSpaceRepository.getAllSpaces();
         ctx.json(getAllSpace);

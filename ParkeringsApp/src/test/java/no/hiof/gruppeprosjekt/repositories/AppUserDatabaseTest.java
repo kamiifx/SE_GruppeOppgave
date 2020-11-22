@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 class AppUserDatabaseTest {
-
     //TESTER KLASSEN AppUserDatabase
 
     AppUserDatabase userDB = new AppUserDatabase("jdbc:sqlite:testappdb.sqlite");
@@ -72,6 +71,9 @@ class AppUserDatabaseTest {
 
     }
 
+    /////////////////////////////
+    //Tester kravet: User.LogIn//
+    /////////////////////////////
     @Test
     public void user_logged_in_with_correct_credentials() {
         //Innlogging til Kari
@@ -82,6 +84,9 @@ class AppUserDatabaseTest {
         Assert.assertTrue(userDB.loginUser(emailInput, passordInput));
     }
 
+    /////////////////////////////
+    //Tester kravet: User.LogIn//
+    /////////////////////////////
     @Test
     public void user_logged_in_with_invalid_password() {
         String emailInput = "kari@gmail.com";
@@ -94,9 +99,9 @@ class AppUserDatabaseTest {
         //eposten ikke samsvarer med noen sine i systemet, dermed vil ingen logges inn ved å skrive inn feil epost
     }
 
-    //////////////////////////////////
-    //Tester kravet: Register.AsUser//
-    //////////////////////////////////
+    ////////////////////////////////
+    //Tester kravet: Register.User//
+    ////////////////////////////////
     @Test
     public void user_is_registered_and_added_to_db() {
         User ahreketil = new User();
@@ -115,7 +120,7 @@ class AppUserDatabaseTest {
     }
 
     //////////////////////////////
-    //Tester kravet: Delete.user//
+    //Tester kravet: Delete.User//
     //////////////////////////////
     @Test
     public void delete_correct_user() {
@@ -134,9 +139,9 @@ class AppUserDatabaseTest {
         Assert.assertNull(userDB.getUserById(2));
     }
 
-    /////////////////////////////////////////
-    //Tester kravet: User.ChangeInformation//
-    /////////////////////////////////////////
+    //////////////////////////////
+    //Tester kravet: Update.User//
+    //////////////////////////////
     @Test
     public void user_is_updated() {
         User halvorsen = new User(22, "Ola", "Halvorsen", "halvorsen..", "halvorsen@live.no");

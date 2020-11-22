@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import static org.mockito.Mockito.*;
 
 class UserControllerTest {
+    //Tester klassen UserController
+
     Context ctx;
     AppUserDatabase userDBrepo;
     UserController userController;
@@ -30,9 +32,9 @@ class UserControllerTest {
         userDBrepo.deleteUser("500");
     }
 
-    //////////////////////////////////
-    //Tester kravet: Register.AsUser//
-    //////////////////////////////////
+    ////////////////////////////////
+    //Tester kravet: Register.User//
+    ////////////////////////////////
     @Test
     public void user_is_registered() {
         when(ctx.formParam("name")).thenReturn("test");
@@ -47,9 +49,9 @@ class UserControllerTest {
         userDBrepo.deleteUser(Integer.toString(user.getId()));
     }
 
-    //////////////////////////////////
-    //Tester kravet: Register.AsUser//
-    //////////////////////////////////
+    ////////////////////////////////
+    //Tester kravet: Register.User//
+    ////////////////////////////////
     @Test
     public void user_is_not_registered_because_a_field_is_missing() {
         //Bytt gjerne andre returnverdier til en tom string
@@ -62,6 +64,9 @@ class UserControllerTest {
     }
 
 
+    /////////////////////////////
+    //Tester kravet: User.LogIn//
+    /////////////////////////////
     @Test
     public void user_login_correct_credentials() {
         when(ctx.formParam("email")).thenReturn("ola_nordmann@gmail.com");
@@ -70,6 +75,9 @@ class UserControllerTest {
         verify(ctx).status(200);  //OK
     }
 
+    /////////////////////////////
+    //Tester kravet: User.LogIn//
+    /////////////////////////////
     @Test
     public void user_login_invalid_password(){
         when(ctx.formParam("email")).thenReturn("ola_nordmann@gmail.com");
@@ -78,6 +86,9 @@ class UserControllerTest {
         verify(ctx).status(401);  //UNAUTHORIZED
     }
 
+    /////////////////////////////
+    //Tester kravet: User.LogIn//
+    /////////////////////////////
     @Test
     public void user_login_invalid_email_causing_nullpointerexception(){
         when(ctx.formParam("email")).thenReturn("ola_nordmann@live.com"); //Ingen i systemet har denne eposten. Da får vi NPE
@@ -113,9 +124,9 @@ class UserControllerTest {
 
     }
 
-    /////////////////////////////////////////
-    //Tester kravet: User.ChangeInformation//
-    /////////////////////////////////////////
+    //////////////////////////////
+    //Tester kravet: Update.User//
+    //////////////////////////////
     @Test
     public void update_user() {
         when(ctx.formParam("userId")).thenReturn("5");
